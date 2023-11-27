@@ -15,7 +15,8 @@ class Tag extends Model
         return $this->belongsToMany(
             PortfolioItem::class,
             'portfolio_items_tags',
-            'portfolio_item_id',
-            'tag_id');
+            'tag_id',
+            'portfolio_item_id'
+            );
     }
 }

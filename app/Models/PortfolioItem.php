@@ -10,12 +10,20 @@ class PortfolioItem extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'image',
+        'link'
+    ];
+
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(
             Tag::class,
             'portfolio_items_tags',
             'portfolio_item_id',
-            'tag_id');
+            'tag_id',
+            );
     }
 }
