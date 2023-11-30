@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-    use HasFactory;
+    protected $fillable = ['name', 'color'];
 
     public function portfolioItems(): BelongsToMany
     {
@@ -19,4 +19,17 @@ class Tag extends Model
             'portfolio_item_id'
             );
     }
+
+    public static function getColorOptions()
+    {
+        return [
+            '#FFABAB' => 'Red',
+            '#BFFCC6' => 'Green',
+            '#FFFFD1' => 'yellow',
+            '#85E3FF' => 'Blue',
+            '#A79AFF' => 'purple',
+            '#FF9CEE' => 'Pink',
+        ];
+    }
+
 }

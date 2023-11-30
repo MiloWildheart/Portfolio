@@ -4,11 +4,11 @@
         <meta charset="UTF-8">
         <title>Robin Knol</title>
         @vite('resources/css/app.css')
-        {{-- blade-formatter-disable --}}
+        <!-- {{-- blade-formatter-disable --}} -->
         <style>
 
         </style>
-        {{-- blade-formatter-enable --}}
+        <!-- {{-- blade-formatter-enable --}} -->
     </head>
     
     <body>
