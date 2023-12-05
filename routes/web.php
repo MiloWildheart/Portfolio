@@ -19,5 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('Portfolio-items', function () {
+    return view('Portfolio-items.index');
+});
+
 Route::resource('Portfolio-items', PortfolioItemController::class);
 Route::resource('Tags', TagController::class);

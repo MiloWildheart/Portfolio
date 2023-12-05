@@ -37,8 +37,6 @@
                             <td class="py-2 px-4 border-b">{{ $portfolioItem->link }}</td>
                             <!-- <td class="py-2 px-4 border-b">{{ $portfolioItem->tags }}</td> -->
                             <td class="py-2 px-4 border-b">
-                                <form action="{{ route('portfolio-items.destroy', $portfolioItem->id) }}" method="post">
-                                    @csrf
                                     @method('DELETE')
 
                                     <a href="{{ route('Portfolio-items.show', $portfolioItem->id) }}" class="bg-yellow-500 text-white px-2 py-1 rounded-md inline-block mr-1">

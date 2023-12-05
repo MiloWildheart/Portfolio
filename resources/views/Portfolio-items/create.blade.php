@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('Portfolio-items.store') }}" method="post">
+                <form action="{{ route('Portfolio-items.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3 row">
