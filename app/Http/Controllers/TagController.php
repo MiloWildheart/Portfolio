@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 
@@ -51,7 +52,7 @@ class TagController extends Controller
     public function show(tag $tag)
     {
         return view('Tags.show', [
-            'tags' => $tag
+            'tag' => $tag
         ]);
     }
 
@@ -86,9 +87,16 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(tag $tag)
+    public function destroy($id): RedirectResponse
     {
+        $tag = Tag::find($id);
+
+        if (!$tag) {
+            return redirect()->route('Tags.index')->with('error', 'Tag not found.');
+        }
+
         $tag->delete();
-        return redirect()->route('Tags.index')->withSucces('Tag deleted succesfully.');
+
+        return redirect()->route('Tags.index')->with('success', 'Tag deleted successfully.');
     }
 }

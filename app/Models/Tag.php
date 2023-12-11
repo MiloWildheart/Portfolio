@@ -20,6 +20,16 @@ class Tag extends Model
             );
     }
 
+    /**
+     * Retrieves the name of the route key used by the model.
+     *
+     * @return string The name of the route key.
+     */
+    public function getRouteKeyName()
+    {
+        return 'id'; // or whatever field you want to use as the key
+    }
+
     public static function getColorOptions()
     {
         return [

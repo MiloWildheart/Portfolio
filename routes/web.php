@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::get('Portfolio-items', function () {
     return view('Portfolio-items.index');
 });
+Route::delete('portfolio-items/{id}', [PortfolioItemController::class, 'destroy'])->name('portfolio-items.destroy');
+Route::delete('tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
 
 Route::resource('Portfolio-items', PortfolioItemController::class);
 Route::resource('Tags', TagController::class);

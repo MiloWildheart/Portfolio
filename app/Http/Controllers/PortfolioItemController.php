@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\PortfolioItem;
 use App\Models\Tag;
@@ -37,28 +38,31 @@ class PortfolioItemController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Add appropriate validation rules
-            // Add other validation rules for your form fields
-        ]);
-        $portfolioItem = PortfolioItem::create($request->all());
+{
+    $request->validate([
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        // Add other validation rules for your form fields
+    ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = 'storage\app\public\Images' . $imageName;
-    
-            // Save the original image
-            Image::make($image)->save($imagePath);
-    
-            // You may want to store the image path in the database
-            $portfolioItem->update(['image' => $imagePath]);
-        }
+    $portfolioItem = PortfolioItem::create($request->all());
 
-        $portfolioItem->tags()->sync($request->input('tags', []));
-        return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created succesfully.');
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+        
+        // Use public_path() to get the correct public path
+        $imagePath = public_path('Images/' . $imageName);
+
+        // Save the original image
+        Image::make($image)->save($imagePath);
+
+        // You may want to store the image path in the database
+        $portfolioItem->update(['image' => 'Images/' . $imageName]);
     }
+
+    $portfolioItem->tags()->sync($request->input('tags', []));
+    return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
+}
 
     /**
      * Display the specified resource.
@@ -111,9 +115,16 @@ class PortfolioItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PortfolioItem $portfolioItem)
+    public function destroy($id): RedirectResponse
     {
+        $portfolioItem = PortfolioItem::find($id);
+
+        if (!$portfolioItem) {
+            return redirect()->route('Portfolio-items.index')->with('error', 'Portfolio item not found.');
+        }
+
         $portfolioItem->delete();
-        return redirect()->route('Portfolio-items.index')->withSuccess('portfolio item deleted successfully.');
+
+        return redirect()->route('Portfolio-items.index')->with('success', 'Portfolio item deleted successfully.');
     }
 }
