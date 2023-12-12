@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('Home', function () {
+    return view('welcome');
+});
 Route::get('Portfolio-items', function () {
     return view('Portfolio-items.index');
 });
