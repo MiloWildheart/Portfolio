@@ -14,7 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(5);
 
         return view('Tags.index',[
             'tags' => $tags,
@@ -62,26 +62,24 @@ class TagController extends Controller
     public function edit(tag $tag)
     {
         return view('Tags.edit', [
-            'tags' => $tag
+            'tag' => $tag
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tag $tag)
+    public function update(Request $request, Tag $tag)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'color' => 'required|string|max:7', 
         ]);
     
-        $tag = Tag::findOrFail();
         $tag->fill($data);
         $tag->save();
     
-        return redirect()->route('tags.index')->with('success', 'Tag updated successfully.');
-    
+        return redirect()->route('Tags.index')->with('success', 'Tag updated successfully.');
     }
 
     /**

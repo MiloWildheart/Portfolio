@@ -25,6 +25,13 @@ Route::get('Home', function () {
 Route::get('Portfolio-items', function () {
     return view('Portfolio-items.index');
 });
+Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('tags.edit');
+
+
+
+Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+
+
 Route::delete('portfolio-items/{id}', [PortfolioItemController::class, 'destroy'])->name('portfolio-items.destroy');
 Route::delete('tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
 
