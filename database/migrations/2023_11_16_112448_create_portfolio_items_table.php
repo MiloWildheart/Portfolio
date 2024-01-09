@@ -26,6 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+  
+      
+
+        // Drop the portfolio_items table
         Schema::dropIfExists('portfolio_items');
+   
     }
 };

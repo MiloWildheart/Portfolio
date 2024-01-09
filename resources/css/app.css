@@ -15,3 +15,12 @@
     background-color: #4CAF50;
     color: white;
 }
+.text-block {
+    /* max-width: 300px; Set your desired maximum width */
+    display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            -webkit-line-clamp: 3; /* Set the number of lines to show */
+            margin-bottom: 1em;
+    
+}

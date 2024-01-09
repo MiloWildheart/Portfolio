@@ -6,7 +6,7 @@
     <x-admin-card>
     <form action="{{ route('Portfolio-items.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-
+                    <!-- Name -->
                     <div class="mb-3 row mt">
                         <label for="name" class="font-semibold bottom-1 text-slate-800 ">Name</label>
                         <div class="col-md-6">
@@ -16,7 +16,7 @@
                             @endif
                         </div>
                     </div>
-
+                    <!-- Description -->
                     <div class="mb-3 row">
                         <label for="description" class="font-semibold bottom-1 text-slate-800">Description</label>
                         <div class="col-md-6">
@@ -26,7 +26,7 @@
                             @endif
                         </div>
                     </div>
-
+                    <!-- Image -->
                     <div class="mb-3 form-group">
                          <label for="image" class="font-semibold bottom-1 text-slate-800">Image:</label>
                          <div class="col-md-6">
@@ -37,6 +37,24 @@
                         </div>
                     </div>
 
+                    <!-- Tags -->
+                    <div class="mb-3 row">
+                        <label class="font-semibold bottom-1 text-slate-800">Tags</label>
+                        <div class="col-md-6">
+                            @foreach ($tags as $tag)
+                            <div class="flex items-center">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" @if(in_array($tag->id, old('tags', []))) checked @endif>
+                            <label for="tag_{{ $tag->id }}" class="ml-2">{{ $tag->name }}</label>
+                            </div>
+                             @endforeach
+
+                            @if ($errors->has('tags'))
+                            <span class="text-danger">{{ $errors->first('tags') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Link -->
                     <div class="mb-3 row">
                         <label for="link" class="font-semibold bottom-1 text-slate-800">link</label>
                         <div class="col-md-6">
@@ -46,6 +64,7 @@
                             @endif
                         </div>
                     </div>
+                    <!-- Submit -->
                     <div class=" row">
                         <input type="submit" class="bg-green-700 text-white px-4 py-2 rounded-md ml-auto mt-2 mr-2" value="Add portfolio Item">
                     </div>

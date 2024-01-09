@@ -21,6 +21,7 @@ export default {
       green: colors.green,
       red: colors.red,
       orange: colors.orange,
+      blue: colors.blue,
       ash: '#C7D1C8',
       ash2: '#DDE3DE',
       ash3: '#A4B6A7',

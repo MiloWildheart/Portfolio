@@ -31,38 +31,77 @@ class PortfolioItemController extends Controller
      */
     public function create()
     {
-        return view('Portfolio-items.create');
+        $tags = Tag::all();
+        return view('Portfolio-items.create', [
+            'tags' => $tags,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+     public function store(Request $request)
 {
     $request->validate([
         'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         // Add other validation rules for your form fields
     ]);
 
-    $portfolioItem = PortfolioItem::create($request->all());
+    $data = $request->except(['_token', 'tags']); // Exclude tags from the main data
 
+    $portfolioItem = PortfolioItem::create($data);
+
+    // Handle image upload
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
         
-        // Use public_path() to get the correct public path
         $imagePath = public_path('Images/' . $imageName);
-
-        // Save the original image
+        
         Image::make($image)->save($imagePath);
 
-        // You may want to store the image path in the database
+        // Update the image path in the database
         $portfolioItem->update(['image' => 'Images/' . $imageName]);
     }
 
+    // Sync tags for the portfolio item
     $portfolioItem->tags()->sync($request->input('tags', []));
+
     return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
 }
+
+
+// --------------------------------------------------OLD--------------------------------------------------
+//     public function store(Request $request)
+// {
+//     $request->validate([
+//         'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+//         // Add other validation rules for your form fields
+//     ]);
+
+//     $portfolioItem = PortfolioItem::create($request->all());
+
+//     if ($request->hasFile('image')) {
+//         $image = $request->file('image');
+//         $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+        
+//         // Use public_path() to get the correct public path
+//         $imagePath = public_path('Images/' . $imageName);
+
+//         // Save the original image
+//         Image::make($image)->save($imagePath);
+
+//         // You may want to store the image path in the database
+//         $portfolioItem->update(['image' => 'Images/' . $imageName]);
+//     }
+
+//     $portfolioItem->tags()->sync($request->input('tags', []));
+//     return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
+// }
+
+
+
 
     /**
      * Display the specified resource.
@@ -80,38 +119,101 @@ class PortfolioItemController extends Controller
     public function edit(PortfolioItem $portfolioItem)
     {
         return view('Portfolio-items.edit', [
-            'portfolioItems' => $portfolioItem
+            'portfolioItem' => $portfolioItem
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PortfolioItem $portfolioItem)
-    {
-        $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Add appropriate validation rules
-            // Add other validation rules for your form fields
-        ]);
 
-        $portfolioItem->update($request->all());
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = 'storage\app\public\Images' . $imageName;
+
+
+     public function update(Request $request, PortfolioItem $portfolioItem)
+     {
+         \Log::info('Request data:', $request->all());
+         
+         $request->validate([
+             'image' => 'image|mimes:jpeg,png,jpg,gif,jfif|max:2048',
+             'name' => 'required|string|max:255',
+             'description' => 'required|string',
+             'link' => 'required|string|max:255',
+             'tags' => 'array',
+         ]);
+     
+         $data = $request->only(['name', 'description', 'link']);
+     
+         $portfolioItem->fill($data);
+     
+         // Handle image upload
+         if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+             
+             $imagePath = public_path('Images/' . $imageName);
+     
+             // Save the original image
+             Image::make($image)->save($imagePath);
+     
+             // Update the image path in the model
+             $portfolioItem->image = 'Images/' . $imageName;
+         }
+     
+         // Sync tags for the portfolio item
+         $portfolioItem->tags()->sync($request->input('tags', []));
+     
+         // Save the model
+         $portfolioItem->save();
+     
+         return redirect()->back()->withSuccess('Portfolio item updated successfully.');
+     }
+
+
+
+
+
+// --------------------------------------------------OLD--------------------------------------------------
+//     public function update(Request $request, PortfolioItem $portfolioItem)
+// {   
+//     \Log::info('Request data:', $request->all());
+//     $request->validate([
+//         'image' => 'image|mimes:jpeg,png,jpg,gif,jfif',
+//         'name' => 'required|string|max:255',
+//         'description' => 'required|string',
+//         'link' => 'required|string|max:255',
+//         'tags' => 'array',
+//     ]);
+
+//     $data = $request->only(['name', 'description', 'link']);
+
+//     $portfolioItem->fill($data);
+
+//     if ($request->hasFile('image')) {
+//         $image = $request->file('image');
+//         $imagePath = 'Images/portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+        
+//         // Save the original image
+//         Image::make($image)->save(public_path($imagePath));
+
+//         // Set the image attribute on the model
+//         $portfolioItem->image = $imagePath;
+//     }
+
+//     $portfolioItem->tags()->sync($request->input('tags', []));
     
-            // Save the original image
-            Image::make($image)->save($imagePath);
+//     // Save the model
+//     $portfolioItem->save();
+
+//     return redirect()->back()->withSuccess('Portfolio item updated successfully.');
+// }
+
+
+
+
+
+
     
-            // You may want to store the image path in the database
-            $portfolioItem->update(['image' => $imagePath]);
-        }
-
-        $portfolioItem->tags()->sync($request->input('tags', []));
-        return redirect()->back()->withSuccess('portfolio item updated succesfully.');
-    }
-
     /**
      * Remove the specified resource from storage.
      */
