@@ -4,12 +4,6 @@
         <meta charset="UTF-8">
         <title>Robin Knol</title>
         @vite('resources/css/app.css')
-        <!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
-        <!-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
-        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-        
-        
-        
      
     </head>
     

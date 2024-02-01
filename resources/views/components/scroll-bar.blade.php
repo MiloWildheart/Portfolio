@@ -1,36 +1,5 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+<style>
 
-.pagination{
-    color: gray;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-.pagination a:hover {
-    background-color: #ddd;
-}
-
-.pagination .active {
-    background-color: #4CAF50;
-    color: white;
-}
-.text-block {
-    /* max-width: 300px; Set your desired maximum width */
-    display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            -webkit-line-clamp: 3; /* Set the number of lines to show */
-            margin-bottom: 1em;
-    
-}
-
-
-html {
-  height:100%;
-  background-image: linear-gradient(to right top, #8A44ad 0%, #3498db 100%);
-}
 
 nav {
   max-width: 960px;
@@ -64,3 +33,24 @@ nav ul li a:hover {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(0, 35, 122, 0.7);
 }
+
+</style>
+
+<div>
+<nav>
+  <ul>
+    <li>
+      <a href="#">Home</a>
+    </li>
+    <li>
+      <a href="#">About</a>
+    </li>
+    <li>
+      <a href="#">Services</a>
+    </li>
+    <li>
+      <a href="#">Contact</a>
+    </li>
+  </ul>
+</nav>
+</div>
