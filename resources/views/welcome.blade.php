@@ -6,12 +6,16 @@
     <title>Homepage</title>
     
 </head>
-<body >
+<body  >
     <!-- Navigation -->
 <x-scroll-bar></x-scroll-bar>
         
+<x-robin></x-robin>
 
+<x-divider> Portfolio</x-divider>
+<!-- Header -->
 <x-header></x-header>
+<x-divider> Robin</x-divider>
 
 </body>
 </html>

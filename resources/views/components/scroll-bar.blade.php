@@ -1,11 +1,21 @@
 <style>
+  .center-container {
+    display: flex;
+    justify-content: center;
+  }
 
+.Logo {
+  width: 10%;
+  height: 10%;
+margin-bottom: 0px;
+}
 
 nav {
   max-width: 960px;
   mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
   margin: 0 auto;
-  padding: 60px 0;
+  padding-top: 5px;
+  padding-bottom: 40px;
 }
 
 nav ul {
@@ -37,16 +47,19 @@ nav ul li a:hover {
 </style>
 
 <div>
+<div class="center-container">
+  <img src="{{ asset('images\LogoDesign-Monsterhatmedia.png') }}" alt="Logo" class="Logo">
+</div>
 <nav>
   <ul>
     <li>
       <a href="#">Home</a>
     </li>
     <li>
-      <a href="#">About</a>
+      <a href="#">About me</a>
     </li>
     <li>
-      <a href="#">Services</a>
+      <a href="#">Portfolio</a>
     </li>
     <li>
       <a href="#">Contact</a>
