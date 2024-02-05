@@ -10,9 +10,10 @@
     <!-- Navigation -->
 <x-scroll-bar></x-scroll-bar>
         
-<x-robin></x-robin>
+<!-- <x-robin></x-robin> -->
+<x-headline_text></x-headline_text>
 
-<x-divider> Portfolio</x-divider>
+<x-divider> Mijn werk</x-divider>
 <!-- Header -->
 <x-header></x-header>
 <x-divider> Robin</x-divider>
