@@ -64,6 +64,7 @@ body {
   transform: translate(-50%, -50%);
   text-align: center;
   width: 100%;
+  padding-top: 100px; /* Adjust the padding-top value to move the content down */
 }
 
 .head > .hero__title {
@@ -72,7 +73,6 @@ body {
   color: white;
   text-align: center;
 }
-
 .head > .hero__text {
   font-size: 1.8rem;
   color: white;

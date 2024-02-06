@@ -38,20 +38,35 @@
   height: 200px;
   width: 200px;
   border-radius: 100px;
-  background: rgb(136,8,8);
-  background: linear-gradient(121deg, rgba(255,255,255,0) 13%, rgba(136,8,8,1) 100%);
-  transition: all 500ms ease-in;
-  transition-delay: 1s;
+  background: rgb(136, 8, 8);
+  background: linear-gradient(121deg, rgba(255, 255, 255, 0) 13%, rgba(136, 8, 8, 1) 100%);
   margin: auto;
-  margin-top: 100px;
-  --margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 300px;
+  margin-bottom: 30px;
+  overflow: hidden; /* Hide overflow to prevent content from spilling out */
+  transition: all 500ms ease-in-out; /* Apply transition to the entire container */
 }
+
 .infocardContainer:hover {
   width: 500px;
   border-radius: 100px 10px 100px 100px;
-  transition: all 500ms ease-out;
+  opacity: 0.9;
 }
+
+.infocardContainer:hover #main {
+  opacity: 1; /* Set the opacity of the left side */
+}
+
+.infocardContainer:hover #textbois {
+  opacity: 1; /* Set the opacity of the right side */
+}
+
+.infocardContainer #main img {
+  height: 180px;
+  width: 180px;
+  transition: transform 0.3s ease; /* Add transition to the image */
+}
+
 
 .infocardContainer div {
   text-color: white;
@@ -143,3 +158,18 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  window.addEventListener('scroll', function() {
+    var title = document.querySelector('.hero__title');
+    // Calculate the opacity based on the scroll position
+    var opacity = 1 - window.scrollY / 500; // Adjust the value (500) for desired speed
+
+    // Ensure opacity is within the range [0, 1]
+    opacity = Math.min(Math.max(opacity, 0), 1);
+
+    // Apply the calculated opacity to the title
+    title.style.opacity = opacity.toString();
+  });
+</script>
