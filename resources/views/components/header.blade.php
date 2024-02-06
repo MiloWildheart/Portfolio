@@ -1,135 +1,145 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400,600i&display=swap" rel="stylesheet">
+</head>
+
 <style>
-  .gallery {
-    --z: 100px;
-    --s: 360px;
-    --g: 8px;
-    display: grid;
-    gap: var(--g);
-    width: calc(2*var(--s) + var(--g));
-    grid-auto-flow: column;
-    position: relative;
-  }
+.infocardContainer > html body {
+  background-color: black;
+  margin: 0 0 0 0;
+}
+.infocardContainer * {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 300;
+}
+.infocardContainer > h2 {
+  font-weight: 600; font-style: italic; font-family: "Fira Sans Condensed", sans-serif;
+}
+.infocardContainer > header {
+  height: 2em;
+  background-color: #111122;
+  margin: 0 0 0 0;
+  padding: auto;
+  font-size: 2em;
+  text-align: center;
+  line-height: 2em;
+  color: white;
+}
+.infocardContainer > a {
+  text-decoration: none;
+}
+.infocardContainer > a:visited {
+  color: #555566;
+}
+.infocardContainer > a:hover {
+  text-decoration: underline;
+}
+.infocardContainer {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  background: rgb(136,8,8);
+  background: linear-gradient(121deg, rgba(255,255,255,0) 13%, rgba(136,8,8,1) 100%);
+  transition: all 500ms ease-in;
+  transition-delay: 1s;
+  margin: auto;
+  margin-top: 100px;
+  --margin-top: 100px;
+  margin-bottom: 100px;
+}
+.infocardContainer:hover {
+  width: 500px;
+  border-radius: 100px 10px 100px 100px;
+  transition: all 500ms ease-out;
+}
 
-  .gallery > img {
-    width: 0;
-    min-width: calc(100% + var(--z)/2);
-    height: 200px;
-    object-fit: cover;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
-    filter: grayscale(100%);
-    cursor: pointer;
-    transition: .5s;
-  }
+.infocardContainer div {
+  text-color: white;
+  flex-shrink: 1;
+  width: 100%;
+  --background-color: green;
+}
+.infocardContainer div * {
+  display: flex;
+  --flex: inherit;
+  overflow: hidden;
+  text-overflow: hidden;
+  --background-color: yellow;
+  color: white;
+  white-space: nowrap;
+  width: 0;
+  height: auto;
+  transition: all 250ms ease-in;
+  transition-delay: 700ms;
+}
+.infocardContainer:hover div *{
+  --background-color: purple;
+  display: flex;
+  visibility: visible;
+  transition: all 200ms ease-out;
+  transition-delay: 300ms;
+  width: 100%;
+  height: auto;
+}
 
-  .gallery > img::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.5s;
-  }
+.infocardContainer #main, .infocardContainer #main img{
+  --background-color: red;
+  height: 200px;
+  width: 200px;
+  padding-right: 10px;
+  border-radius: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.infocardContainer #main img{
+  height: 180px;
+  width: 180px;
+  transition: none;
+  display: float;
+  position: relative;
+  border: 10px solid white;
+  margin: 0 0 0 0; padding: 0 0 0 0;
+}
+.infocardContainer #textbois {
+  position: relative;
+}
+.infocardContainer #textbois #hotlinks {
+  max-width: 60%;
+  max-height: 30px;
+  
+  --background-color: white;
+  position:absolute;
+  bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 13px;
+}
+.infocardContainer #textbois #hotlinks * {
+  background-color: white;
+  max-width: 30px;
+  --margin: 0 1px 0 1px;
+  border-radius: 25px;
+}
 
-  .gallery:hover > img::before {
-    opacity: 1;
-  }
-
-  .gallery > img:hover {
-    width: calc(var(--s)/2);
-    filter: grayscale(0%);
-  }
-
-  .gallery > img:first-child {
-    place-self: start;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(2*var(--z)) 100% ,0 100%);
-    --mask: conic-gradient(from -135deg at right,#0000,#000 1deg 89deg,#0000 90deg) 50%/100% calc(2*var(--z)) repeat-y;
-  }
-
-  .gallery > img:last-child {
-    place-self: end;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    --mask: conic-gradient(from   45deg at left ,#0000,#000 1deg 89deg,#0000 90deg) 50% calc(50% - var(--z))/100% calc(2*var(--z)) repeat-y;
-  }
-
-  .text-overlay {
-    position: absolute;
-    color: white;
-    font-size: 1.5rem;
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none; /* Make sure the overlay doesn't interfere with hover events */
-    background: rgba(255, 255, 255, 0.2); /* Glassmorphism background */
-    backdrop-filter: blur(10px); /* Adjust the blur as needed */
-    border-radius: 10px; /* Adjust the border-radius as needed */
-    padding: 10px; /* Adjust the padding as needed */
-  }
-
-  .text-overlay.archer {
-    top: 50%; 
-    left: 45%; /* Adjust the left position for Archer */
-    transform: translate(-50%, -50%);
-  }
-
-  .text-overlay.saber {
-    top: 50%; 
-    left: 55%; /* Adjust the left position for Saber */
-    transform: translate(-50%, -50%);
-  }
-
-  .container {
-    display: grid;
-    place-content: center;
-    position: relative;
-  }
-
-  h1 {
-    text-align: center;
-    font-family: system-ui, sans-serif;
-    font-size: 3rem;
-    word-spacing: .8em;
-  }
-
-  h1 span:first-child {
-    color: #af3817;
-  }
-
-  h1 span:last-child {
-    color: #0b3fa1;
-  }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const gallery = document.querySelector('.gallery');
-    const textArcher = document.querySelector('.text-overlay.archer');
-    const textSaber = document.querySelector('.text-overlay.saber');
-
-    gallery.addEventListener('mouseover', function (event) {
-      if (event.target.matches('.gallery > img:first-child')) {
-        textArcher.style.opacity = '1';
-        textSaber.style.opacity = '0';
-      } else if (event.target.matches('.gallery > img:last-child')) {
-        textArcher.style.opacity = '0';
-        textSaber.style.opacity = '1';
-      }
-    });
-
-    gallery.addEventListener('mouseout', function () {
-      textArcher.style.opacity = '0';
-      textSaber.style.opacity = '0';
-    });
-  });
-</script>
-
-<div class="container">
-  <div class="gallery">
-    <img src="https://assets.codepen.io/1480814/archer.jpg" alt="Archer from Fate/Stay">
-    <img src="https://assets.codepen.io/1480814/saber.jpg" alt="Saber from Fate/Stay">
+<div class="infocardContainer">
+  <div id="main">
+    <img src="{{ asset('images\profile.png') }}"></img>
   </div>
-  <div class="text-overlay archer">Text for Archer</div>
-  <div class="text-overlay saber">Text for Saber</div>
+  <div id="textbois">
+    <h2>Robin Knol</h2>
+    <h4>Junior Web Developer</h4>
+    <a href="mailto:limecicila@gmail.com">Robinknol7@gmail.com</a>
+    <div id="hotlinks">
+      <a href="https://codepen.io/LIMESTA"><img id="codepenio" src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Small.png" target="_blank"></img>
+      </a>
+      <a href="https://codepen.io/LIMESTA">
+        <img id="codepenio" src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Small.png" target="_blank"></img>
+      </a>
+      <a href="https://codepen.io/LIMESTA">
+        <img id="codepenio" src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Small.png" target="_blank"></img>
+      </a>
+    </div>
+  </div>
 </div>

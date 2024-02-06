@@ -6,18 +6,26 @@
     <title>Homepage</title>
     
 </head>
-<body  >
+  
+<body>
+    
+<x-background-hero>
     <!-- Navigation -->
+    <xslot:navi>
 <x-scroll-bar></x-scroll-bar>
-        
-<!-- <x-robin></x-robin> -->
-<x-headline_text></x-headline_text>
+</xslot:navi>
+<!-- Header -->
+<x-slot:title>
+<x-header></x-header>
+</x-slot>
+
 
 <x-divider> Mijn werk</x-divider>
-<!-- Header -->
-<x-header></x-header>
+<x-portfolio-button></x-portfolio-button>
+
 <x-divider> Robin</x-divider>
 
+</x-background-hero>
 </body>
 </html>
 
