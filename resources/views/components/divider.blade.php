@@ -1,4 +1,4 @@
-<style>
+<style scoped>
     .divider {
   font-family: "Share Tech Mono", monospace;
   color: #000;

@@ -1,5 +1,5 @@
 
-<style>
+<style >
     /* Base
 ----------------------------------------------------------- */
 
@@ -93,7 +93,7 @@ body {
 /* Main Content
 ----------------------------------------------------------- */
 
-.main-content {
+head > .main-content {
   max-width: 800px;
   margin: 0 auto;
   padding: 3rem 1.5rem;
@@ -110,6 +110,7 @@ body {
 /* Main Content [END]
 ----------------------------------------------------------- */
 </style>
+
 <div class="head">
 <div class="hero">
   <div class="hero__content">
@@ -120,5 +121,6 @@ body {
 </div>
 <section class="main-content">
  {{$slot}}
+ {{$MContent}}
 </section>
 </div>

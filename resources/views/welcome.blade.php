@@ -11,21 +11,23 @@
     
 <x-background-hero>
     <!-- Navigation -->
-    <xslot:navi>
+   
 <x-scroll-bar></x-scroll-bar>
-</xslot:navi>
+
 <!-- Header -->
 <x-slot:title>
 <x-header></x-header>
 </x-slot>
 
+<x-slot:MContent>
 
-<x-divider> Mijn werk</x-divider>
-<x-portfolio-button></x-portfolio-button>
 
-<x-divider> Robin</x-divider>
+<x-text-section-1></x-text-section-1>
 
+
+</x-slot>
 </x-background-hero>
+
 </body>
 </html>
 

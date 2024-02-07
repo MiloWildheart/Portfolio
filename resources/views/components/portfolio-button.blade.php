@@ -1,5 +1,5 @@
-<style>
-  .gallery {
+<style scoped>
+ .twoway > .gallery {
     --z: 100px;
     --s: 360px;
     --g: 8px;
@@ -55,7 +55,7 @@
     --mask: conic-gradient(from   45deg at left ,#0000,#000 1deg 89deg,#0000 90deg) 50% calc(50% - var(--z))/100% calc(2*var(--z)) repeat-y;
   }
 
-  .text-overlay {
+  .twoway > .text-overlay {
     position: absolute;
     color: white;
     font-size: 1.5rem;
@@ -68,13 +68,13 @@
     padding: 10px; /* Adjust the padding as needed */
   }
 
-  .text-overlay.archer {
+  .twoway > .text-overlay.archer {
     top: 50%; 
     left: 45%; /* Adjust the left position for Archer */
     transform: translate(-50%, -50%);
   }
 
-  .text-overlay.saber {
+  .twoway > .text-overlay.saber {
     top: 50%; 
     left: 55%; /* Adjust the left position for Saber */
     transform: translate(-50%, -50%);
@@ -86,18 +86,18 @@
     position: relative;
   }
 
-  h1 {
+  .twoway > h1 {
     text-align: center;
     font-family: system-ui, sans-serif;
     font-size: 3rem;
     word-spacing: .8em;
   }
 
-  h1 span:first-child {
+  .twoway > h1 span:first-child {
     color: #af3817;
   }
 
-  h1 span:last-child {
+  .twoway > h1 span:last-child {
     color: #0b3fa1;
   }
 </style>
@@ -125,7 +125,7 @@
   });
 </script>
 
-<div class="container">
+<div class="container twoway">
   <div class="gallery">
     <img src="https://assets.codepen.io/1480814/archer.jpg" alt="Archer from Fate/Stay">
     <img src="https://assets.codepen.io/1480814/saber.jpg" alt="Saber from Fate/Stay">
