@@ -1,4 +1,4 @@
-<style >
+<style scoped>
   .Navi {
     position: fixed; /* Fixed position to keep it at the top */
     top: 0; /* Position at the top of the viewport */

@@ -1,11 +1,27 @@
-<x-divider>Mijn werk</x-divider>
-<div class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6 md:px-12 xl:px-32">
-        <div class="mb-16 text-center">
-            <h2 class="mb-4 text-center text-2xl text-gray-900 font-bold md:text-4xl">Tailus blocks leadership</h2>
-            <p class="text-gray-600 lg:w-8/12 lg:mx-auto">Tailus prides itself not only on award-winning technology, but also on the talent of its people of some of the brightest minds and most experienced executives in business.</p>
-        </div>
-      <x-portfolio-button></x-portfolio-button>
-        </div>
+<style scoped>
+    .Work {
+        align-items: center;
+        width: 90vw; /* Set width to 90% of viewport width */
+        max-width: 700px; /* Set maximum width */
+        margin: 0 auto; /* Center the container */
+    }
+    .Work > h1 {
+        text-align: center;
+        font-family: 'Fira Sans Condensed';  
+    }
+    .Work > p {
+        text-align: justify;
+        font-family: 'Fira Sans Condensed';
+        font-size: 1em;
+        margin-bottom: 1.5em;
+        width: 100%; /* Occupy full width of the container */
+    }
+</style>
+
+<div class="Work">
+    <h1>{{ $SectionTitle }}</h1>
+    <p class="text-balance">{{ $SectionText }}</p>
+    <div class="SectionLink">
+        {{ $SectionLink }}
     </div>
 </div>

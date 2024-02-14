@@ -1,4 +1,5 @@
 <style scoped>
+
  .twoway > .gallery {
     --z: 100px;
     --s: 360px;
@@ -81,25 +82,28 @@
   }
 
   .container {
-    display: grid;
-    place-content: center;
-    position: relative;
-  }
+        display: grid;
+        place-content: center;
+        position: relative;
+        width: 90vw; /* Set width to 90% of viewport width */
+        max-width: 700px; /* Set maximum width */
+        margin: 0 auto; /* Center the container */
+    }
 
-  .twoway > h1 {
-    text-align: center;
-    font-family: system-ui, sans-serif;
-    font-size: 3rem;
-    word-spacing: .8em;
-  }
+    .twoway > h1 {
+        text-align: center;
+        font-family: system-ui, sans-serif;
+        font-size: 3vw; /* Set font size relative to viewport width */
+        word-spacing: .8em;
+    }
 
-  .twoway > h1 span:first-child {
-    color: #af3817;
-  }
+    .twoway > h1 span:first-child {
+        color: #af3817;
+    }
 
-  .twoway > h1 span:last-child {
-    color: #0b3fa1;
-  }
+    .twoway > h1 span:last-child {
+        color: #0b3fa1;
+    }
 </style>
 
 <script>
@@ -125,7 +129,7 @@
   });
 </script>
 
-<div class="container twoway">
+<div class="twoway container ">
   <div class="gallery">
     <img src="https://assets.codepen.io/1480814/archer.jpg" alt="Archer from Fate/Stay">
     <img src="https://assets.codepen.io/1480814/saber.jpg" alt="Saber from Fate/Stay">

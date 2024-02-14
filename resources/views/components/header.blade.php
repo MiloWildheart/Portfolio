@@ -2,7 +2,7 @@
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300,400,600i&display=swap" rel="stylesheet">
 </head>
 
-<style >
+<style scoped >
 .infocardContainer > html body {
   background-color: black;
   margin: 0 0 0 0;
