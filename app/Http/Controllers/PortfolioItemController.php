@@ -20,11 +20,34 @@ class PortfolioItemController extends Controller
         $portfolioItems = PortfolioItem::latest()->paginate(3);
         $tags = Tag::all();
     
-        return view('Portfolio-items.index', [
+        return view('PublicPortfolio', [
             'portfolioItems' => $portfolioItems,
             'tags' => $tags,
         ]);
     }
+ 
+    public function search(Request $request)
+{
+    // Retrieve search query from the request
+    $query = $request->input('query');
+
+    // Retrieve selected tags from the request
+    $tags = $request->input('tags', []);
+
+    // Query to filter portfolio items based on search criteria
+    $portfolioItems = PortfolioItem::query()
+        ->where('name', 'like', "%$query%")
+        ->when(count($tags) > 0, function ($query) use ($tags) {
+            // Filter by selected tags if any
+            $query->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('id', $tags);
+            });
+        })
+        ->paginate(10); // Adjust the pagination limit as needed
+
+    // Return filtered portfolio items to the view
+    return view('PublicPortfolio', compact('portfolioItems'));
+}
 
     /**
      * Show the form for creating a new resource.

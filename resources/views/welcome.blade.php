@@ -41,6 +41,7 @@
 
 </x-slot>
 </x-background-hero>
+<x-skills></x-skills>
 <x-footer></x-footer>
 </body>
 </html>

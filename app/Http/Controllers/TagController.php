@@ -12,6 +12,17 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function showPublicPortfolio()
+     {
+         $tags = Tag::all(); // Assuming you fetch tags from the database
+         
+         dd($tags); // Dump $tags here to check if it contains data
+         
+         return view('PublicPortfolio', [
+             'tags' => $tags,
+         ]);
+     }
     public function index()
     {
         $tags = Tag::paginate(5);

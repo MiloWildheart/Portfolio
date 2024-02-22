@@ -10,7 +10,7 @@
                     <div class="mb-3 row mt">
                         <label for="name" class="font-semibold bottom-1 text-slate-800 ">Name</label>
                         <div class="col-md-6">
-                          <input type="text" class="w-full h-10 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                          <input type="text" class="w-full h-10 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-control @error('name') is-invalid @enderror"" id="name" name="name" value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
@@ -26,6 +26,7 @@
                             @endif
                         </div>
                     </div>
+
                     <!-- Image -->
                     <div class="mb-3 form-group">
                          <label for="image" class="font-semibold bottom-1 text-slate-800">Image:</label>
@@ -39,20 +40,20 @@
 
                     <!-- Tags -->
                     <div class="mb-3 row">
-                        <label class="font-semibold bottom-1 text-slate-800">Tags</label>
-                        <div class="col-md-6">
-                            @foreach ($tags as $tag)
-                            <div class="flex items-center">
-                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" @if(in_array($tag->id, old('tags', []))) checked @endif>
-                            <label for="tag_{{ $tag->id }}" class="ml-2">{{ $tag->name }}</label>
-                            </div>
-                             @endforeach
+                         <label class="font-semibold bottom-1 text-slate-800">Tags</label>
+    <div class="col-md-6">
+        @foreach ($tags as $tag)
+        <div class="flex items-center">
+            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" @if(in_array($tag->id, old('tags', []))) checked @endif>
+            <label for="tag_{{ $tag->id }}" class="ml-2">{{ $tag->name }}</label>
+        </div>
+        @endforeach
 
-                            @if ($errors->has('tags'))
-                            <span class="text-danger">{{ $errors->first('tags') }}</span>
-                            @endif
-                        </div>
-                    </div>
+        @if ($errors->has('tags'))
+        <span class="text-danger">{{ $errors->first('tags') }}</span>
+        @endif
+    </div>
+</div>
 
                     <!-- Link -->
                     <div class="mb-3 row">

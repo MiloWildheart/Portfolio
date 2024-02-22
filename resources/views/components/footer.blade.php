@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/71ac13805e.js" crossorigin="anonymous"></script>
 <style scoped>
 .footer-bottom {
     padding: 15px 0;
@@ -61,6 +62,7 @@
 }
 #footer-socials {
     text-align: right;
+    margin-top: 15px;
 }
 
 #footer-socials .socials {
@@ -146,18 +148,7 @@ a.socials-item:hover {
         <div class="container">
           <div class="row">
 <div class="col-md-3">
-              <div class="footer-site-info">2020 © <a href="https://www.youtube.com/watch?v=pdr4IzBpacI&t=34s" target="_blank">Top HTML & CSS Program </a></div>
-            </div>
-
-            <div class="col-md-6">
-              <nav id="footer-navigation" class="site-navigation footer-navigation centered-box" role="navigation">
-                <ul id="footer-menu" class="nav-menu styled clearfix inline-inside">
-                  <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26"><a href="#">Support</a></li>
-                  <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27"><a href="#">Contact Us</a></li>
-                  <li id="menu-item-28" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="#">Disclaimer</a></li>
-                  <li id="menu-item-29" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29"><a href="#">Add more</a></li>
-                </ul>
-              </nav>
+              <div class="footer-site-info">Robin Knol</div>
             </div>
 
             <div class="col-md-3">
@@ -169,7 +160,6 @@ a.socials-item:hover {
                   </a>
                   <a href="#" target="_blank" title="Twitter" class="socials-item">
                     <i class="fab fa-twitter twitter"></i>
-
                   </a>
                   <a href="#" target="_blank" title="Instagram" class="socials-item">
                     <i class="fab fa-instagram instagram"></i>
@@ -189,9 +179,3 @@ a.socials-item:hover {
       </div>
     </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="https://daniellaharel.com/raindrops/js/raindrops.js"></script>
-
- <script> jQuery('#waterdrop').raindrops({color:'#1c1f2f', canvasHeight:150, density: 0.1, frequency: 20});
-</script>
