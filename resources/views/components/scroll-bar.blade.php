@@ -50,7 +50,7 @@
     padding: 18px;
     font-family: "Open Sans";
     text-transform: uppercase;
-    color: rgba(0, 35, 122, 0.5);
+    color: rgba(0, 35, 122, 0.9);
     font-size: 18px;
     text-decoration: none;
     display: block;
@@ -59,7 +59,7 @@
   nav ul li a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(0, 35, 122, 0.7);
+    color: rgba(0, 35, 122, 0.9);
   }
 </style>
 
@@ -70,13 +70,13 @@
   <nav>
     <ul>
       <li>
-        <a href="#">Home</a>
+        <a href="/">Home</a>
       </li>
       <li>
         <a href="#">About me</a>
       </li>
       <li>
-        <a href="#">Portfolio</a>
+        <a href="portfolio">Portfolio</a>
       </li>
       <li>
         <a href="#">Contact</a>

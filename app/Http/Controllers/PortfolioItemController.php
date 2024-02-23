@@ -20,12 +20,12 @@ class PortfolioItemController extends Controller
         $portfolioItems = PortfolioItem::latest()->paginate(3);
         $tags = Tag::all();
     
-        return view('PublicPortfolio', [
+        return view('Portfolio-items.index', [
             'portfolioItems' => $portfolioItems,
             'tags' => $tags,
         ]);
     }
- 
+    
     public function search(Request $request)
 {
     // Retrieve search query from the request
