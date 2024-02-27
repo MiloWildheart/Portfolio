@@ -12,20 +12,21 @@
         border-radius: 4px;
         margin: 0 auto;
         padding: 40px 0;
+        overflow: hidden;
     }
 
-    .PortfolioGallery > .content {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 60px;
-        padding: 0 30px;
-    }
+    .PortfolioGallery .content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    padding: 0 30px;
+}
 
-     .wrapper {
-        width: 33.3%;
-        height: 100%;
-        padding: 10px;
-    }
+.wrapper {
+    display: flex;
+    width: 33.3%;
+    padding: 10px;
+}
 
     .name {
         position: relative;
@@ -168,13 +169,13 @@
         .wrapper {
             width: 100%;
         }
-    }
+
 </style>
 
 <div class="PortfolioGallery">
 <div class="PortfolioGallery container">
-    @forelse ($portfolioItems as $portfolioItem)
         <div class="content">
+        @forelse ($portfolioItems as $portfolioItem)
             <div class="wrapper">
                 <div class="box vintage">
                     <img src="{{  $portfolioItem->image }}" alt="image">
@@ -182,9 +183,9 @@
                     <p>{{ $portfolioItem->description }}</p>
                 </div>
             </div>
-        </div>
+        
     @empty
         <p>No portfolio items found.</p>
-    @endforelse 
+    @endforelse </div>
 </div>
 </div>
