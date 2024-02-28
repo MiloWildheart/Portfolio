@@ -16,7 +16,6 @@
         <x-searchbar :tags="$tags"></x-searchbar>
     </x-whitespace>
     
-    <x-divider>Test</x-divider>
     <x-portfolio-gallery :portfolioItems="$portfolioItems"></x-portfolio-gallery>
     <x-footer></x-footer>
 </body>

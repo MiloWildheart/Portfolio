@@ -1,0 +1,13 @@
+-Admin:
+    -portfolioItems Edit error:
+        The POST method is not supported for route Portfolio-items/15. Supported methods: GET, HEAD, PUT, PATCH, DELETE.
+
+mainSite:
+    - searchbar doesnt work yet.
+    - Links in footer.
+    - Links in header.
+    - header on homepage needs to extend downward a little more.
+    - need images for double button, and their links need to work.
+    - Need to write text for the site itself.
+    - Need to make About me page with C.V.
+    - Need to make a working contact page.

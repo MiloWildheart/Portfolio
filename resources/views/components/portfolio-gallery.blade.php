@@ -1,14 +1,14 @@
 <style scoped>
-    .PortfolioGallery > body {
+    .PortfolioGallery>body {
         margin: 0;
         width: 100%;
         height: 100vh;
         font-family: 'DM-sans', sans-serif;
     }
 
-    .PortfolioGallery > .container {
+    .PortfolioGallery>.container {
         width: 100%;
-        max-width: 1200px;
+        max-width: 100%;
         border-radius: 4px;
         margin: 0 auto;
         padding: 40px 0;
@@ -16,17 +16,18 @@
     }
 
     .PortfolioGallery .content {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 60px;
-    padding: 0 30px;
-}
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        padding: 0 30px;
+        width:
+    }
 
-.wrapper {
-    display: flex;
-    width: 33.3%;
-    padding: 10px;
-}
+    .wrapper {
+        display: flex;
+        width: 25%;
+        padding: 10px;
+    }
 
     .name {
         position: relative;
@@ -34,7 +35,7 @@
         display: inline-block;
     }
 
-     .box {
+    .box {
         position: relative;
         max-height: 300px;
         border-radius: 4px;
@@ -47,7 +48,9 @@
             0 20.9px 25.1px rgba(0, 0, 0, 0.043),
             0 50px 60px rgba(0, 0, 0, 0.06);
 
-        .hide { opacity: 0; }
+        .hide {
+            opacity: 0;
+        }
 
         .frame {
             position: absolute;
@@ -58,7 +61,8 @@
             transform: translate(-50%, -50%);
         }
 
-        h2, p {
+        h2,
+        p {
             position: absolute;
             color: #fff;
             z-index: 2;
@@ -88,7 +92,7 @@
         }
 
         img {
-            position:relative;
+            position: relative;
             width: 100%;
             height: 100%;
             z-index: 1;
@@ -101,7 +105,7 @@
             &:after {
                 content: '';
                 position: absolute;
-                background-color: rgba(0,0,0,.6);
+                background-color: rgba(0, 0, 0, .6);
                 width: 100%;
                 height: 100%;
                 top: 0;
@@ -129,14 +133,15 @@
             font-size: 14px;
             letter-spacing: 1px;
             text-align: center;
+            overflow: hidden;
         }
 
         &:before {
-            content:'';
+            content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+            background: linear-gradient(to bottom, rgba(72, 76, 97, 0) 0%, rgba(72, 76, 97, 0.8) 75%);
             z-index: 2;
             bottom: -100%;
             left: 0;
@@ -157,35 +162,38 @@
                 transform: translate3d(0, -30px, 0);
             }
         }
-    }
+   
 
+  
     @media screen and (max-width: 880px) {
         .wrapper {
             width: 50%;
         }
-    }
+    
 
     @media screen and (max-width: 520px) {
         .wrapper {
             width: 100%;
         }
-
+    }
 </style>
 
 <div class="PortfolioGallery">
-<div class="PortfolioGallery container">
+    <div class="PortfolioGallery container">
         <div class="content">
-        @forelse ($portfolioItems as $portfolioItem)
-            <div class="wrapper">
-                <div class="box vintage">
-                    <img src="{{  $portfolioItem->image }}" alt="image">
-                    <h2>{{ $portfolioItem->title }}</h2>
-                    <p>{{ $portfolioItem->description }}</p>
+            @forelse($portfolioItems as $portfolioItem)
+                <div class="wrapper">
+                    <div class="box vintage">
+                        <img src="{{ $portfolioItem->image }}" alt="image">
+                        <h2>{{ $portfolioItem->name }}</h2>
+                        <p>@foreach ($portfolioItem->tags as $tag)
+                            {{ $tag->name }}
+                        @endforeach</p>
+                    </div>
                 </div>
-            </div>
-        
-    @empty
-        <p>No portfolio items found.</p>
-    @endforelse </div>
-</div>
-</div>
+
+            @empty
+                <p>No portfolio items found.</p>
+            @endforelse</div>
+        </div>
+    </div>

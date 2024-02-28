@@ -6,6 +6,7 @@
     background-color: #181828 !important;
     color: #b0b0b0;
     font-family: rubik;
+    text-align: center;
 }
 .footer-bottom ul {
     margin: 0;
@@ -58,11 +59,13 @@
 }
 
 .footer-bottom ul {
+  
     margin: 0;
 }
 #footer-socials {
-    text-align: right;
+    display: inline-block; /* Ensure it's an inline block */
     margin-top: 15px;
+    text-align: center;
 }
 
 #footer-socials .socials {
@@ -139,6 +142,8 @@ a.socials-item:hover {
 }
 .footer-site-info
 {
+  
+  text-align: center;
   padding-top: 10px;
 }
 

@@ -1,5 +1,7 @@
-<div class="container mx-auto py-8">
-    <input class="w-full h-16 px-3 rounded mb-6 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg"
+
+<div class="container mx-auto pt-8 pb-1">
+    <x-divider>search</x-divider>
+    <input class="w-full h-16  rounded mb-6 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg"
         type="search" placeholder="Search...">
     <div class="flex">
         <p class="text-xl mb-2">Tags</p>
