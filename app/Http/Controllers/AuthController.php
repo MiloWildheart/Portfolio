@@ -15,7 +15,7 @@ class AuthController extends Controller
     }
 
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -26,7 +26,8 @@ class AuthController extends Controller
         $remember = $request->filled('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            return redirect()->intended('/Tags');
+            // Authentication passed...
+            return redirect()->route('Portfolio-items.index'); // Redirect to admin panel
         } else {
             return redirect()->back()
                 ->with('error', 'Invalid credentials');

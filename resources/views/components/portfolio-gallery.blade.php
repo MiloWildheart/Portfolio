@@ -184,7 +184,7 @@
             @forelse($portfolioItems as $portfolioItem)
                 <div class="wrapper">
                     <div class="box vintage">
-                        <img src="{{ $portfolioItem->image }}" alt="image">
+                        <img src="/{{ $portfolioItem->image }}" alt="image">
                         <h2>{{ $portfolioItem->name }}</h2>
                         <p>@foreach ($portfolioItem->tags as $tag)
                             {{ $tag->name }}

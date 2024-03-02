@@ -3,6 +3,7 @@
 use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Models\Tag;
 use App\Models\PortfolioItem;
@@ -28,7 +29,8 @@ Route::get('portfolio', function () {
     return view('PublicPortfolio', compact('portfolioItems', 'tags'));
 })->name('portfolio.unauthenticated');
 Route::get('portfolio/search', [PortfolioItemController::class, 'search'])->name('portfolio.search');
-Route::get('login', fn() => to_route('Auth.create'))->name('login');
+Route::get('login', fn() => route('Auth.store'))->name('login');
+
 
     //delete routes
 Route::delete('logout', fn() => to_route('auth.destroy'))->name('logout');
@@ -38,9 +40,7 @@ Route::resource('Auth', AuthController::class)->only(['create', 'store']);
 
 // Portfolio Items routes for unauthenticated users (read-only)
 
-// Tags routes for unauthenticated users (read-only)
-Route::get('tags', [TagController::class, 'index'])->name('tags.index');
-Route::get('tags/{tag}', [TagController::class, 'show'])->name('tags.show');
+
 
 //Authentication
 Route::middleware(['auth'])->group(function () {
@@ -48,12 +48,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Portfolio-items', function () {
         return view('Portfolio-items.index');
     })->name('portfolio-items.index');
+    Route::delete('Logout', [AuthController::class, 'destroy'])->name('logout');
 Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('tags.edit');
-Route::get('/Portfolio-items/{portfolioItem}/edit', [PortfolioItemController::class, 'edit'])->name('portfolio-items.edit');
+Route::get('/Portfolio-items/{portfolioItem}/edit', [PortfolioItemController::class, 'edit'])->name('portfolioItems.edit');
     //put routes
 Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
     //Delete routes
-Route::delete('portfolio-items/{id}', [PortfolioItemController::class, 'destroy'])->name('portfolio-items.destroy');
+Route::delete('portfolio-items/{id}', [PortfolioItemController::class, 'destroy'])->name('portfolioItems.destroy');
 Route::delete('tags/{id}', [TagController::class, 'destroy'])->name('tags.destroy');
     //resource routes
 Route::resource('Portfolio-items', PortfolioItemController::class);

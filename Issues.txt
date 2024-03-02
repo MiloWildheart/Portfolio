@@ -3,7 +3,7 @@
         The POST method is not supported for route Portfolio-items/15. Supported methods: GET, HEAD, PUT, PATCH, DELETE.
 
 mainSite:
-    - searchbar doesnt work yet.
+    - searchbar doesnt work yet. FIXED 2-3-2024
     - Links in footer.
     - Links in header.
     - header on homepage needs to extend downward a little more.
@@ -11,3 +11,4 @@ mainSite:
     - Need to write text for the site itself.
     - Need to make About me page with C.V.
     - Need to make a working contact page.
+    - tag list crud accessable without loggin in. FIXED 2-3-2024

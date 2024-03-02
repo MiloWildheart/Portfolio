@@ -15,39 +15,87 @@ class PortfolioItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() 
-    {
-        $portfolioItems = PortfolioItem::latest()->paginate(3);
-        $tags = Tag::all();
+    // public function index() 
+    // {
+    //     $portfolioItems = PortfolioItem::latest()->paginate(3);
+    //     $tags = Tag::all();
     
-        return view('Portfolio-items.index', [
-            'portfolioItems' => $portfolioItems,
-            'tags' => $tags,
-        ]);
-    }
-    
-    public function search(Request $request)
+    //     return view('Portfolio-items.index', [
+    //         'portfolioItems' => $portfolioItems,
+    //         'tags' => $tags,
+    //     ]);
+    // }
+
+    public function index(Request $request) 
 {
-    // Retrieve search query from the request
-    $query = $request->input('query');
+    // Retrieve search parameters from the request
+    $name = $request->input('name');
+    $tag = $request->input('tag');
 
-    // Retrieve selected tags from the request
-    $tags = $request->input('tags', []);
+    // Start with all portfolio items
+    $portfolioItems = PortfolioItem::query();
 
-    // Query to filter portfolio items based on search criteria
-    $portfolioItems = PortfolioItem::query()
-        ->where('name', 'like', "%$query%")
-        ->when(count($tags) > 0, function ($query) use ($tags) {
-            // Filter by selected tags if any
-            $query->whereHas('tags', function ($query) use ($tags) {
-                $query->whereIn('id', $tags);
-            });
-        })
-        ->paginate(10); // Adjust the pagination limit as needed
+    // Apply search filters
+    if ($name) {
+        // Filter by title if provided
+        $portfolioItems->where('name', 'like', '%' . $name . '%');
+    }
 
-    // Return filtered portfolio items to the view
-    return view('PublicPortfolio', compact('portfolioItems'));
+    if ($tag) {
+        // Filter by tag if provided
+        $portfolioItems->whereHas('tags', function ($query) use ($tag) {
+            $query->where('name', 'like', '%' . $tag . '%');
+        });
+    }
+
+    // Paginate the results
+    $portfolioItems = $portfolioItems->latest()->paginate(3);
+
+    // Retrieve all tags to populate the tag filter
+    $tags = Tag::all();
+
+    return view('Portfolio-items.index', [
+        'portfolioItems' => $portfolioItems,
+        'tags' => $tags,
+    ]);
 }
+    
+public function search(Request $request)
+{
+   // Retrieve search parameters from the request
+   $name = $request->input('name');
+   $tag = $request->input('tag');
+   
+
+   // Start with all portfolio items
+   $portfolioItems = PortfolioItem::query();
+
+   // Apply search filters
+   if ($name) {
+       // Filter by title if provided
+       $portfolioItems->where('name', 'like', '%' . $name . '%');
+   }
+
+   if ($tag) {
+    // Filter by tag if provided
+    $tags = explode(',', $tag); // Convert comma-separated tag string to an array
+    $tags = array_map('trim', $tags); // Trim whitespace from each tag
+    $portfolioItems->whereHas('tags', function ($query) use ($tags) {
+        $query->whereIn('name', $tags);
+    });
+}
+
+
+   // Paginate the results
+   $portfolioItems = $portfolioItems->latest()->paginate(12);
+
+   // Retrieve all tags to populate the tag filter
+   $tags = Tag::all();
+   
+   // Return filtered portfolio items and all tags to the view
+   return view('PublicPortfolio', compact('portfolioItems', 'tags'));
+}
+
 
     /**
      * Show the form for creating a new resource.
