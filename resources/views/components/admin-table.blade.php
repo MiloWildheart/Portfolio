@@ -38,23 +38,41 @@
             box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
         }
         .col-1 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
         .col-2 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
         .col-3 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
         .col-4 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
     }
         .col-5 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
-    }
+    
         .col-6 {
+            display: flex;
+    justify-content: center;
+    align-items: center;
             flex-basis: 16%;
         }
 
@@ -85,17 +103,79 @@
                 }
             }
         }
-    }
+ 
+
+        .table-header {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: flex; /* Ensure it's a flex container */
+    justify-content: center; /* Align children to the start and end */
+    align-items: center; /* Align items vertically */
+    padding: 0 30px; /* Adjust padding as needed */
+    
+}
+
+.create {
+    background-color: #68D391; /* Background color */
+    color: #1A202C; /* Text color */
+    font-weight: bold; /* Font weight */
+    padding: 0.5rem 1rem; /* Padding */
+    border-radius: 0.375rem; /* Rounded corners */
+    margin-top: 0.5rem; /* Margin - top */
+    margin-right: 30px; /* Add margin-right to push it to the right */
+}
+
+.create:hover {
+    background-color: #48BB78; /* Hover background color */
+}
+.button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #F4C430; /* Default background color for buttons */
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #EEDC82; /* Hover background color */
+}
+
+.Edit {
+    margin-left: auto;
+}
+
+.Delete {
+    margin-left: auto;
+}
 </Style>
+
 @props(['data', 'dataSource'])
 
 <div class="container">
+
+    <x-divider>
+                @if ($dataSource === 'Tags')
+                    Tags
+                @elseif ($dataSource === 'portfolioItems')
+                    Portfolio 
+                @endif
+    </x-divider>
+<div class="table-header">
+    <a href="{{ route($dataSource . '.create') }}" class="flex create ">
+            create New
+    </a>
+    </div>
     <ul class="responsive-table">
         <li class="table-header">
             <!-- Dynamic table headers based on data source -->
             <div class="col col-1">Name</div>
             <div class="col col-2">
-                @if ($dataSource === 'tags')
+                @if ($dataSource === 'Tags')
                     Color
                 @elseif ($dataSource === 'portfolioItems')
                     Description
@@ -113,7 +193,7 @@
                 <!-- Dynamic row data based on data source -->
                 <div class="col col-1" data-label="Name">{{ $item->name }}</div>
                 <div class="col col-2" data-label="Description">
-                    @if ($dataSource === 'tags')
+                    @if ($dataSource === 'Tags')
                         {{ $item->color }}
                     @elseif ($dataSource === 'portfolioItems')
                         {{ Str::limit($item->description, 10) }}
@@ -123,12 +203,14 @@
                     <div class="col col-3" data-label="Image">&#10003;</div>
                     <div class="col col-4" data-label="Link">{{ $item->link }}</div>
                 @endif
-                <div class="col col-5"><a href="{{ route($dataSource . '.edit', $item->id) }}">Edit</a></div>
-                <div class="col col-6">
+                <div class="col col-5 Edit">
+                    <a href="{{ route($dataSource . '.edit', $item->id) }}" class="button">Edit</a>
+                </div>
+                <div class="col col-6 Delete">
                     <form action="{{ route($dataSource . '.destroy', $item->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit">Delete</button>
+                    <button type="submit" class="button">Delete</button>
                     </form>
                 </div>
             </li>
@@ -136,6 +218,9 @@
             <!-- Handle empty data -->
         @endforelse
     </ul>
+    <div>
+        {{ $data->links() }}
+    </div>
 </div>
 
 

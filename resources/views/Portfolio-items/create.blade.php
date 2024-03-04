@@ -1,73 +1,115 @@
-<x-layout>
-    <x-admin-card class="mb-2">
-    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-5">Create New Portfolio Item</h3>
-    <a href="{{ route('Portfolio-items.index') }}" class="bg-green-700 text-white px-4 py-2 rounded-md ml-auto mt-2 mr-2 mb-2">&larr; Back</a>
-    </x-admin-card>
-    <x-admin-card>
-    <form action="{{ route('Portfolio-items.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <!-- Name -->
-                    <div class="mb-3 row mt">
-                        <label for="name" class="font-semibold bottom-1 text-slate-800 ">Name</label>
-                        <div class="col-md-6">
-                          <input type="text" class="w-full h-10 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-control @error('name') is-invalid @enderror"" id="name" name="name" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Description -->
-                    <div class="mb-3 row">
-                        <label for="description" class="font-semibold bottom-1 text-slate-800">Description</label>
-                        <div class="col-md-6">
-                            <textarea class="w-full h-32 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-control @error('description') is-invalid @enderror " id="description" name="description">{{ old('description') }}</textarea>
-                            @if ($errors->has('description'))
-                                <span class="text-danger">{{ $errors->first('description') }}</span>
-                            @endif
-                        </div>
-                    </div>
+<style scoped>
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
 
-                    <!-- Image -->
-                    <div class="mb-3 form-group">
-                         <label for="image" class="font-semibold bottom-1 text-slate-800">Image:</label>
-                         <div class="col-md-6">
-                            <input type="file" name="image" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100 form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}">
-                            @if ($errors->has('image'))
-                                <span class="text-danger">{{ $errors->first('image') }}</span>
-                            @endif
-                        </div>
-                    </div>
+    .glassmorphism-title {
+        margin-bottom: 40px;
+        color: #000; /* Black text color */
+    }
 
-                    <!-- Tags -->
-                    <div class="mb-3 row">
-                         <label class="font-semibold bottom-1 text-slate-800">Tags</label>
-    <div class="col-md-6">
-        @foreach ($tags as $tag)
-        <div class="flex items-center">
-            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" @if(in_array($tag->id, old('tags', []))) checked @endif>
-            <label for="tag_{{ $tag->id }}" class="ml-2">{{ $tag->name }}</label>
+    .glassmorphism-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(15.5px);
+        -webkit-backdrop-filter: blur(15.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 50%;
+        width: 100%;
+    }
+
+    .glassmorphism-card .card-body {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px; /* Add padding to the card body */
+    }
+
+    .glassmorphism-card .form-group label {
+        color: #000; /* Black text color */
+        font-weight: bold; /* Make labels more pronounced */
+        margin-bottom: 10px; /* Align labels a little bit away from the borders */
+    }
+
+    .glassmorphism-card .form-group input,
+    .glassmorphism-card .form-group textarea {
+        background: rgba(255, 255, 255, 1); /* White background */
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Visible black border */
+        border-radius: 15px;
+        color: #000; /* Black text color */
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .glassmorphism-card .form-group input[type="file"] {
+        cursor: pointer;
+    }
+
+    .glassmorphism-card .btn-send {
+        background: linear-gradient(145deg, #00dbde, #fc00ff);
+        color: #fff;
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 20px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .glassmorphism-card .btn-send:hover {
+        filter: brightness(1.1);
+    }
+
+    .glassmorphism-card .text-danger {
+        color: #ff5050;
+    }
+</style>
+
+<div class="container">
+    <h1 class="glassmorphism-title">Make a new item!</h1>
+
+    <div class="glassmorphism-card mt-2 p-4">
+        <div class="card-body">
+            <form id="contact-form" role="form">
+                <div class="controls">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                        @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+                        @if ($errors->has('description'))
+                            <span class="text-danger">{{ $errors->first('description') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image *</label>
+                        <input type="file" name="image" class="form-control" id="image" name="image" value="{{ old('image') }}">
+                        @if ($errors->has('image'))
+                            <span class="text-danger">{{ $errors->first('image') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="font-semibold">Tags</label>
+                        <x-admincheckbox data-source="tags" :data="$tags"></x-admincheckbox>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-send" value="Create new">
+                    </div>
+                </div>
+            </form>
         </div>
-        @endforeach
-
-        @if ($errors->has('tags'))
-        <span class="text-danger">{{ $errors->first('tags') }}</span>
-        @endif
     </div>
 </div>
-
-                    <!-- Link -->
-                    <div class="mb-3 row">
-                        <label for="link" class="font-semibold bottom-1 text-slate-800">link</label>
-                        <div class="col-md-6">
-                          <input type="text" class="w-full h-10 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-control form-control @error('link') is-invalid @enderror" id="link" name="link" value="{{ old('link') }}">
-                            @if ($errors->has('link'))
-                                <span class="text-danger">{{ $errors->first('link') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- Submit -->
-                    <div class=" row">
-                        <input type="submit" class="bg-green-700 text-white px-4 py-2 rounded-md ml-auto mt-2 mr-2" value="Add portfolio Item">
-                    </div>
-    </x-admin-card>
-    </x-layout>

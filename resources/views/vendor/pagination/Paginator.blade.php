@@ -1,5 +1,5 @@
 <style scoped>
-    .pagination {
+       .pagination {
         display: flex;
         justify-content: center;
         margin-top: 20px;
@@ -33,25 +33,6 @@
         color: #fff;
         border-color: #007bff;
     }
-
-    /* Disabled state */
-    .pagination li.disabled a {
-        pointer-events: none; /* Disable pointer events */
-        background-color: #f0f0f0; /* Set background color */
-        color: #ccc; /* Set text color */
-        border-color: #ccc; /* Set border color */
-    }
-
-    /* Style for disabled << button */
-    .pagination li.disabled span {
-        pointer-events: none; /* Disable pointer events */
-        background-color: #f0f0f0; /* Set background color */
-        color: #ccc; /* Set text color */
-        border-color: #ccc; /* Set border color */
-        padding: 8px 16px; /* Apply padding */
-        display: inline-block; /* Ensure it's inline */
-        border-radius: 5px; /* Apply border radius */
-    }
 </style>
 
 
@@ -75,9 +56,11 @@
                 {{-- Array of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
-                        <li class="{{ $page == $paginator->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $url }}">{{ $page }}</a>
-                        </li>
+                        @if ($page == $paginator->currentPage())
+                            <li class="active"><span>{{ $page }}</span></li>
+                        @else
+                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                        @endif
                     @endforeach
                 @endif
             @endforeach

@@ -33,12 +33,11 @@ Route::get('login', fn() => route('Auth.store'))->name('login');
 
 
     //delete routes
-Route::delete('logout', fn() => to_route('auth.destroy'))->name('logout');
+
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
     //resource routes
 Route::resource('Auth', AuthController::class)->only(['create', 'store']);
 
-// Portfolio Items routes for unauthenticated users (read-only)
 
 
 
@@ -50,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('portfolio-items.index');
     Route::delete('Logout', [AuthController::class, 'destroy'])->name('logout');
 Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('tags.edit');
+Route::get('portfolio-items/create', [PortfolioItemController::class, 'create'])->name('portfolioItems.create');
 Route::get('/Portfolio-items/{portfolioItem}/edit', [PortfolioItemController::class, 'edit'])->name('portfolioItems.edit');
     //put routes
 Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');

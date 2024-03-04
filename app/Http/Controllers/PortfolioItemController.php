@@ -49,7 +49,7 @@ class PortfolioItemController extends Controller
     }
 
     // Paginate the results
-    $portfolioItems = $portfolioItems->latest()->paginate(3);
+    $portfolioItems = $portfolioItems->latest()->paginate(5);
 
     // Retrieve all tags to populate the tag filter
     $tags = Tag::all();
@@ -143,37 +143,6 @@ public function search(Request $request)
 }
 
 
-// --------------------------------------------------OLD--------------------------------------------------
-//     public function store(Request $request)
-// {
-//     $request->validate([
-//         'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-//         // Add other validation rules for your form fields
-//     ]);
-
-//     $portfolioItem = PortfolioItem::create($request->all());
-
-//     if ($request->hasFile('image')) {
-//         $image = $request->file('image');
-//         $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
-        
-//         // Use public_path() to get the correct public path
-//         $imagePath = public_path('Images/' . $imageName);
-
-//         // Save the original image
-//         Image::make($image)->save($imagePath);
-
-//         // You may want to store the image path in the database
-//         $portfolioItem->update(['image' => 'Images/' . $imageName]);
-//     }
-
-//     $portfolioItem->tags()->sync($request->input('tags', []));
-//     return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
-// }
-
-
-
-
     /**
      * Display the specified resource.
      */
@@ -239,51 +208,6 @@ public function search(Request $request)
      
          return redirect()->back()->withSuccess('Portfolio item updated successfully.');
      }
-
-
-
-
-
-// --------------------------------------------------OLD--------------------------------------------------
-//     public function update(Request $request, PortfolioItem $portfolioItem)
-// {   
-//     \Log::info('Request data:', $request->all());
-//     $request->validate([
-//         'image' => 'image|mimes:jpeg,png,jpg,gif,jfif',
-//         'name' => 'required|string|max:255',
-//         'description' => 'required|string',
-//         'link' => 'required|string|max:255',
-//         'tags' => 'array',
-//     ]);
-
-//     $data = $request->only(['name', 'description', 'link']);
-
-//     $portfolioItem->fill($data);
-
-//     if ($request->hasFile('image')) {
-//         $image = $request->file('image');
-//         $imagePath = 'Images/portfolio_' . time() . '.' . $image->getClientOriginalExtension();
-        
-//         // Save the original image
-//         Image::make($image)->save(public_path($imagePath));
-
-//         // Set the image attribute on the model
-//         $portfolioItem->image = $imagePath;
-//     }
-
-//     $portfolioItem->tags()->sync($request->input('tags', []));
-    
-//     // Save the model
-//     $portfolioItem->save();
-
-//     return redirect()->back()->withSuccess('Portfolio item updated successfully.');
-// }
-
-
-
-
-
-
     
     /**
      * Remove the specified resource from storage.
