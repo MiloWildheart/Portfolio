@@ -1,117 +1,120 @@
 <style scoped>
-
-h1 {
-    margin-bottom: 40px;
-}
-
-label {
-    color: #333;
-}
-
-.btn-send {
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    width: 80%;
-    margin-left: 3px;
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
     }
-.help-block.with-errors {
-    color: #ff5050;
-    margin-top: 5px;
 
+    .glassmorphism-title {
+        margin-bottom: 40px;
+        color: #000; /* Black text color */
+    }
+
+    .glassmorphism-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(15.5px);
+        -webkit-backdrop-filter: blur(15.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 50%;
+        width: 100%;
+    }
+
+    .glassmorphism-card .card-body {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px; /* Add padding to the card body */
+    }
+
+    .glassmorphism-card .form-group label {
+        color: #000; /* Black text color */
+        font-weight: bold; /* Make labels more pronounced */
+        margin-bottom: 10px; /* Align labels a little bit away from the borders */
+    }
+
+    .glassmorphism-card .form-group input,
+    .glassmorphism-card .form-group textarea {
+        background: rgba(255, 255, 255, 1); /* White background */
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Visible black border */
+        border-radius: 15px;
+        color: #000; /* Black text color */
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .glassmorphism-card .form-group input[type="file"] {
+        cursor: pointer;
+    }
+
+    .glassmorphism-card .btn-send {
+        background: linear-gradient(145deg, #00dbde, #fc00ff);
+        color: #fff;
+        border-radius: 15px;
+        padding: 10px;
+        margin-top: 20px;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .glassmorphism-card .btn-send:hover {
+        filter: brightness(1.1);
+    }
+
+    .glassmorphism-card .text-danger {
+        color: #ff5050;
+    }
+    .glassmorphism-dropdown {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    color: #000;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-.card{
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
 </style>
-
-
 <div class="container">
-        <div class=" text-center mt-5 ">
+    <h1 class="glassmorphism-title">Make a new item!</h1>
 
-            <h1 >Make a new item!</h1>
-                
-            
-        </div>
-
-    
-    <div class="row ">
-      <div class="col-lg-7 mx-auto">
-        <div class="card mt-2 mx-auto p-4 bg-light">
-            <div class="card-body bg-light">
-       
-            <div class = "container">
-                             <form id="contact-form" role="form">
-
-            
-
-            <div class="controls">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_name">Name *</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+    <div class="glassmorphism-card mt-2 p-4">
+        <div class="card-body">
+            <form id="contact-form" role="form">
+                <div class="controls">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                        @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="color">Tags *</label>
+                            <select name="color" id="color" class="w-full h-10 px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 form-select @error('color') is-invalid @enderror glassmorphism-dropdown">
+                                <option value="" disabled selected>Select a color</option>
+                                @foreach (\App\Models\Tag::getColorOptions() as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('color'))
+                                <span class="text-danger">{{ $errors->first('color') }}</span>
                             @endif
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="form_message">Description *</label>
-                            <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
-                            @if ($errors->has('description'))
-                                <span class="text-danger">{{ $errors->first('description') }}</span>
-                            @endif
-                        </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-send" value="Create new">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="form_email">Image *</label>
-                            <input type="file" name="image" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100 form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}">
-                            @if ($errors->has('image'))
-                                <span class="text-danger">{{ $errors->first('image') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                         <label class="font-semibold bottom-1 text-slate-800">Tags</label>
-                    <x-admincheckbox data-source="tags" :data="$tags">
-                    </x-admincheckbox>
-                    </div>
-                    </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        
-                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Create new" >
-                    
-                </div>
-          
-                </div>
-
-
+            </form>
         </div>
-         </form>
-        </div>
-            </div>
-
-
     </div>
-        <!-- /.8 -->
-
-    </div>
-    <!-- /.row-->
-
-</div>
 </div>
