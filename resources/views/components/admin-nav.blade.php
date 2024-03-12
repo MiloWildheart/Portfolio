@@ -145,7 +145,7 @@ height: 100%;
                 </li>
                 <!--Portfolio-->
                 <li>
-                    <a href="Portfolio-items">
+                    <a href="/Portfolio-items">
                         <i class="fa fa-film fa-2x"></i>
                         <span class="nav-text">
                            Portfolio
@@ -154,7 +154,7 @@ height: 100%;
                 </li>
                 <!--Portfolio-->
                 <li>
-                    <a href="Tags">
+                    <a href="/Tags">
                         <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                            Tags
@@ -165,7 +165,7 @@ height: 100%;
 </ul>
             <ul class="logout">
                 <li>
-                   <a href="logout">
+                   <a href="/logout">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Logout

@@ -29,14 +29,14 @@ Route::get('portfolio', function () {
     return view('PublicPortfolio', compact('portfolioItems', 'tags'));
 })->name('portfolio.unauthenticated');
 Route::get('portfolio/search', [PortfolioItemController::class, 'search'])->name('portfolio.search');
-Route::get('login', fn() => route('Auth.store'))->name('login');
+Route::redirect('/login', 'Auth/create');
 
 
     //delete routes
 
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
     //resource routes
-Route::resource('Auth', AuthController::class)->only(['create', 'store']);
+    Route::resource('Auth', AuthController::class)->only(['create', 'store', 'destroy']);
 
 
 
@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Portfolio-items', function () {
         return view('Portfolio-items.index');
     })->name('portfolio-items.index');
-    Route::delete('Logout', [AuthController::class, 'destroy'])->name('logout');
+Route::get('logout', [AuthController::class, 'destroy'])->name('logout');
 Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('tags.edit');
 Route::get('portfolio-items/create', [PortfolioItemController::class, 'create'])->name('portfolioItems.create');
 Route::get('/Portfolio-items/{portfolioItem}/edit', [PortfolioItemController::class, 'edit'])->name('portfolioItems.edit');

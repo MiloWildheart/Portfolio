@@ -39,40 +39,40 @@
         }
         .col-1 {
             display: flex;
-    justify-content: center;
-    align-items: center;
+            justify-content: center;
+            align-items: center;
             flex-basis: 16%;
         }
         .col-2 {
             display: flex;
-    justify-content: center;
-    align-items: center;
             flex-basis: 16%;
+            align-items: center;
+            justify-content: center;
         }
         .col-3 {
             display: flex;
-    justify-content: center;
-    align-items: center;
+            justify-content: center;
+            align-items: center;
             flex-basis: 16%;
         }
         .col-4 {
             display: flex;
-    justify-content: center;
-    align-items: center;
+            justify-content: center;
+            align-items: center;
             flex-basis: 16%;
         }
-    }
+    
         .col-5 {
             display: flex;
-    justify-content: center;
-    align-items: center;
             flex-basis: 16%;
+            justify-content: center; /* Align content to the start */
+            align-items: center;
         }
     
         .col-6 {
             display: flex;
-    justify-content: center;
-    align-items: center;
+            justify-content: center;
+            align-items: center;
             flex-basis: 16%;
         }
 
@@ -99,11 +99,11 @@
                     padding-right: 10px;
                     content: attr(data-label);
                     flex-basis: 50%;
-                    text-align: right;
+                    text-align: center;
                 }
             }
         }
- 
+    }
 
         .table-header {
     font-size: 14px;
@@ -144,6 +144,13 @@
 .button:hover {
     background-color: #EEDC82; /* Hover background color */
 }
+.Delete .button {
+    background-color: #FF2800; /* Set the background color for delete button */
+}
+
+.Delete .button:hover {
+    background-color: #FF5733; /* Hover background color for delete button */
+}
 
 .Edit {
     margin-left: auto;
@@ -157,14 +164,16 @@
 @props(['data', 'dataSource'])
 
 <div class="container">
-
+<!-- Title header -->
     <x-divider>
-                @if ($dataSource === 'Tags')
-                    Tags
-                @elseif ($dataSource === 'portfolioItems')
-                    Portfolio 
-                @endif
+        @if ($dataSource === 'Tags')
+            Tags
+        @elseif ($dataSource === 'portfolioItems')
+            Portfolio 
+        @endif
     </x-divider>
+
+    <!-- dynamic table -->
 <div class="table-header">
     <a href="{{ route($dataSource . '.create') }}" class="flex create ">
             create New

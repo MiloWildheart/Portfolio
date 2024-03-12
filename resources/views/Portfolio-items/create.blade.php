@@ -55,31 +55,31 @@
     }
 
     .glassmorphism-card .btn-send {
-        background: linear-gradient(145deg, #00dbde, #fc00ff);
-        color: #fff;
-        border-radius: 15px;
-        padding: 10px;
-        margin-top: 20px;
-        width: 100%;
-        cursor: pointer;
-    }
+    background: #FF2800; /* Set the background color for the submit button */
+    color: #fff; /* Text color */
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+}
 
-    .glassmorphism-card .btn-send:hover {
-        filter: brightness(1.1);
-    }
-
+.glassmorphism-card .btn-send:hover {
+    filter: brightness(1.1);
+}
     .glassmorphism-card .text-danger {
         color: #ff5050;
     }
 </style>
-
+<x-admin-nav>
 <div class="container">
     <h1 class="glassmorphism-title">Make a new item!</h1>
 
     <div class="glassmorphism-card mt-2 p-4">
         <div class="card-body">
-            <form id="contact-form" role="form">
-                <div class="controls">
+            <form id="contact-form" role="form" action="{{ route('Portfolio-items.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf    
+            <div class="controls">
                     <div class="form-group">
                         <label for="name">Name *</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
@@ -106,6 +106,13 @@
                         <x-admincheckbox data-source="tags" :data="$tags"></x-admincheckbox>
                     </div>
                     <div class="form-group">
+                    <label for="link">link *</label>
+                        <input type="text" class="form-control" id="link" name="link" value="{{ old('link') }}">
+                        @if ($errors->has('link'))
+                            <span class="text-danger">{{ $errors->first('link') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <input type="submit" class="btn btn-send" value="Create new">
                     </div>
                 </div>
@@ -113,3 +120,4 @@
         </div>
     </div>
 </div>
+</x-admin-nav>

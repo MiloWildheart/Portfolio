@@ -11,8 +11,7 @@
   display: inline-flex;
   color: var(--color-text);
   font-size: 0.5rem;
-  font-weight: 400;
-  text-transform: uppercase;
+  font-weight: 200;
   align-items: center;
   line-height: 1;
   border-radius: 5px;
@@ -21,9 +20,9 @@
   margin-top:5px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 692px) {
   .lns-checkbox {
-    font-size: 1.25rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -35,11 +34,11 @@
 
 .lns-checkbox input[type="checkbox"] {
   position: absolute;
-  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(0.5px, 0.5px, 0.5px, 0.5px);
   padding: 0;
   border: 0;
-  height: 1px;
-  width: 1px;
+  height: 0.5px;
+  width: 0.5px;
   overflow: hidden;
 }
 
@@ -58,22 +57,22 @@
 .lns-checkbox span::before {
   content: "";
   display: inline-block;
-  border-radius: 3px;
-  background-color: #414051;
+  border-radius: 2px;
+  background-color: #222021;
   margin-right: 8px;
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
   border: 1px solid transparent;
 }
 
 .lns-checkbox span::after {
   content: "";
   display: inline-block;
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
+  height: 10px;
+  width: 10px;
+  border-radius: 2px;
   background-color: transparent;
-  left: 3px;
+  left: 2px;
   position: absolute;
 }
 
