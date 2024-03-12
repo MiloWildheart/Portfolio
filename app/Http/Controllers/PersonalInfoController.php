@@ -6,15 +6,14 @@ use App\Models\PersonalInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePersonalInfoRequest;
 use App\Http\Requests\UpdatePersonalInfoRequest;
+use App\Models\WorkExperience;
+use Illuminate\Http\Request;
 
 class PersonalInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $personalInfos = PersonalInfo::all();
+        $personalInfos = PersonalInfo::with('workExperiences', 'education', 'relevantKnowledges')->get();
         return view('personal_info.index', compact('personalInfos'));
     }
 
@@ -29,10 +28,15 @@ class PersonalInfoController extends Controller
             // Validation rules here
         ]);
 
-        PersonalInfo::create($request->all());
+        $personalInfo = PersonalInfo::create($request->all());
 
         return redirect()->route('personal_info.index')
             ->with('success', 'Personal information created successfully.');
+    }
+
+    public function show(PersonalInfo $personalInfo)
+    {
+        return view('personal_info.show', compact('personalInfo'));
     }
 
     public function edit(PersonalInfo $personalInfo)

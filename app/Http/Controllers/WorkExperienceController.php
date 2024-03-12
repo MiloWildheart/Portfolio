@@ -6,6 +6,8 @@ use App\Models\WorkExperience;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWorkExperienceRequest;
 use App\Http\Requests\UpdateWorkExperienceRequest;
+use App\Models\PersonalInfo;
+use Illuminate\Http\Request;
 
 class WorkExperienceController extends Controller
 {
