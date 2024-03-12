@@ -14,54 +14,49 @@ class PersonalInfoController extends Controller
      */
     public function index()
     {
-        //
+        $personalInfos = PersonalInfo::all();
+        return view('personal_info.index', compact('personalInfos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('personal_info.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePersonalInfoRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        PersonalInfo::create($request->all());
+
+        return redirect()->route('personal_info.index')
+            ->with('success', 'Personal information created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(PersonalInfo $personalInfo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(PersonalInfo $personalInfo)
     {
-        //
+        return view('personal_info.edit', compact('personalInfo'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePersonalInfoRequest $request, PersonalInfo $personalInfo)
+    public function update(Request $request, PersonalInfo $personalInfo)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        $personalInfo->update($request->all());
+
+        return redirect()->route('personal_info.index')
+            ->with('success', 'Personal information updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(PersonalInfo $personalInfo)
     {
-        //
+        $personalInfo->delete();
+
+        return redirect()->route('personal_info.index')
+            ->with('success', 'Personal information deleted successfully.');
     }
 }

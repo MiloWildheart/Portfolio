@@ -9,59 +9,51 @@ use App\Http\Requests\UpdateWorkExperienceRequest;
 
 class WorkExperienceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $workExperiences = WorkExperience::all();
+        return view('work_experience.index', compact('workExperiences'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('work_experience.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreWorkExperienceRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        WorkExperience::create($request->all());
+
+        return redirect()->route('work_experience.index')
+            ->with('success', 'Work experience created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(WorkExperience $workExperience)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(WorkExperience $workExperience)
     {
-        //
+        return view('work_experience.edit', compact('workExperience'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWorkExperienceRequest $request, WorkExperience $workExperience)
+    public function update(Request $request, WorkExperience $workExperience)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        $workExperience->update($request->all());
+
+        return redirect()->route('work_experience.index')
+            ->with('success', 'Work experience updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(WorkExperience $workExperience)
     {
-        //
+        $workExperience->delete();
+
+        return redirect()->route('work_experience.index')
+            ->with('success', 'Work experience deleted successfully.');
     }
 }
