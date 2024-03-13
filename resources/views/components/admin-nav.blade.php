@@ -1,6 +1,6 @@
 <style>
-    @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-}
+ @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 .fa-2x {
 font-size: 2em;
@@ -161,7 +161,43 @@ height: 100%;
                         </span>
                     </a>
                 </li>
-             
+                <!--C.V.-->
+                <li>
+                    <a href="/personal-info">
+                        <i class="fa fa-user fa-2x"></i>
+                        <span class="nav-text">
+                           C.V.
+                        </span>
+                    </a>
+                </li>
+                <!--Work Experiences-->
+                <li>
+                    <a href="/work-experience">
+                        <i class="fa fa-briefcase fa-2x"></i>
+                        <span class="nav-text">
+                           Work Experiences
+                        </span>
+                    </a>
+                </li>
+                <!--Education-->
+                <li>
+                    <a href="/education">
+                        <i class="fa fa-cap fa-2x"></i>
+                        <span class="nav-text">
+                           Education
+                        </span>
+                    </a>
+                </li>
+                <!--Relevant Knowledge-->
+                <li>
+                    <a href="/relevant-knowledge">
+                        <i class="fa fa-book fa-2x"></i>
+                        <span class="nav-text">
+                           Relevant Knowledge
+                        </span>
+                    </a>
+                </li>
+
 </ul>
             <ul class="logout">
                 <li>

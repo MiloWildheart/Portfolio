@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalInfo extends Model
 {
     use HasFactory;
-
+    protected $table = 'personal_info';
     protected $fillable = ['name', 'age', 'email', 'residence', 'Github', 'Linkedin', 'image', 'personal_story'];
 
     public function education()

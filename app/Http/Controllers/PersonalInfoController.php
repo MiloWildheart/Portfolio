@@ -6,16 +6,22 @@ use App\Models\PersonalInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePersonalInfoRequest;
 use App\Http\Requests\UpdatePersonalInfoRequest;
+use App\Models\Education;
+use App\Models\RelevantKnowledge;
 use App\Models\WorkExperience;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PersonalInfoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $personalInfos = PersonalInfo::with('workExperiences', 'education', 'relevantKnowledges')->get();
-        return view('personal_info.index', compact('personalInfos'));
+        // Paginate the results
+        $personalInfo = PersonalInfo::with('workExperiences', 'education', 'relevantKnowledges')->paginate(5);
+    
+        return view('personal_info.index', compact('personalInfo'));
     }
+    
 
     public function create()
     {

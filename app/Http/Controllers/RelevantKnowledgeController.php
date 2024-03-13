@@ -6,62 +6,55 @@ use App\Models\RelevantKnowledge;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRelevantKnowledgeRequest;
 use App\Http\Requests\UpdateRelevantKnowledgeRequest;
+use Illuminate\Http\Request;
 
 class RelevantKnowledgeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $relevantKnowledges = RelevantKnowledge::paginate(5);
+        return view('relevant_knowledge.index', compact('relevantKnowledges'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('relevant_knowledge.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreRelevantKnowledgeRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        RelevantKnowledge::create($request->all());
+
+        return redirect()->route('relevant_knowledge.index')
+            ->with('success', 'Relevant knowledge created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(RelevantKnowledge $relevantKnowledge)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(RelevantKnowledge $relevantKnowledge)
     {
-        //
+        return view('relevant_knowledge.edit', compact('relevantKnowledge'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRelevantKnowledgeRequest $request, RelevantKnowledge $relevantKnowledge)
+    public function update(Request $request, RelevantKnowledge $relevantKnowledge)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        $relevantKnowledge->update($request->all());
+
+        return redirect()->route('relevant_knowledge.index')
+            ->with('success', 'Relevant knowledge updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(RelevantKnowledge $relevantKnowledge)
     {
-        //
+        $relevantKnowledge->delete();
+
+        return redirect()->route('relevant_knowledge.index')
+            ->with('success', 'Relevant knowledge deleted successfully.');
     }
 }

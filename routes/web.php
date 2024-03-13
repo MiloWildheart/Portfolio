@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\PortfolioItemController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\WorkExperienceController;
+use App\Http\Controllers\PersonalInfoController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\RelevantKnowledgeController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +40,7 @@ Route::redirect('/login', 'Auth/create');
 
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
     //resource routes
-    Route::resource('Auth', AuthController::class)->only(['create', 'store', 'destroy']);
+Route::resource('Auth', AuthController::class)->only(['create', 'store', 'destroy']);
 
 
 
@@ -44,7 +48,7 @@ Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
 //Authentication
 Route::middleware(['auth'])->group(function () {
     //get routes
-    Route::get('Portfolio-items', function () {
+Route::get('Portfolio-items', function () {
         return view('Portfolio-items.index');
     })->name('portfolio-items.index');
 Route::get('logout', [AuthController::class, 'destroy'])->name('logout');
@@ -59,5 +63,8 @@ Route::delete('tags/{id}', [TagController::class, 'destroy'])->name('tags.destro
     //resource routes
 Route::resource('Portfolio-items', PortfolioItemController::class);
 Route::resource('Tags', TagController::class);
-
+Route::resource('education', EducationController::class);
+Route::resource('work-experience', WorkExperienceController::class);
+Route::resource('relevant-knowledge', RelevantKnowledgeController::class);
+Route::resource('personal-info', PersonalInfoController::class);
 });

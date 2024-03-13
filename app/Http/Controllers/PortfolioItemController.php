@@ -54,7 +54,7 @@ class PortfolioItemController extends Controller
     // Retrieve all tags to populate the tag filter
     $tags = Tag::all();
 
-    return view('Portfolio-items.index', [
+    return view('Portfolio_items.index', [
         'portfolioItems' => $portfolioItems,
         'tags' => $tags,
     ]);
@@ -103,7 +103,7 @@ public function search(Request $request)
     public function create()
     {
         $tags = Tag::all();
-        return view('Portfolio-items.create', [
+        return view('Portfolio_items.create', [
             'tags' => $tags,
         ]);
     }
@@ -139,7 +139,7 @@ public function search(Request $request)
     // Sync tags for the portfolio item
     $portfolioItem->tags()->sync($request->input('tags', []));
 
-    return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
+    return redirect()->route('Portfolio_items.index')->withSuccess('New Portfolio item created successfully.');
 }
 
 
@@ -148,7 +148,7 @@ public function search(Request $request)
      */
     public function show(PortfolioItem $portfolioItem)
     {
-        return view('Portfolio-items.show', [
+        return view('Portfolio_items.show', [
             'portfolioItems' => $portfolioItem
         ]);
     }
@@ -158,7 +158,7 @@ public function search(Request $request)
      */
     public function edit(PortfolioItem $portfolioItem)
     {
-        return view('Portfolio-items.edit', [
+        return view('Portfolio_items.edit', [
             'portfolioItem' => $portfolioItem
         ]);
     }
@@ -217,11 +217,11 @@ public function search(Request $request)
         $portfolioItem = PortfolioItem::find($id);
 
         if (!$portfolioItem) {
-            return redirect()->route('Portfolio-items.index')->with('error', 'Portfolio item not found.');
+            return redirect()->route('Portfolio_items.index')->with('error', 'Portfolio item not found.');
         }
 
         $portfolioItem->delete();
 
-        return redirect()->route('Portfolio-items.index')->with('success', 'Portfolio item deleted successfully.');
+        return redirect()->route('Portfolio_items.index')->with('success', 'Portfolio item deleted successfully.');
     }
 }

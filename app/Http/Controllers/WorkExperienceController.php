@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class WorkExperienceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $workExperiences = WorkExperience::all();
+        $workExperiences = WorkExperience::paginate(5);
         return view('work_experience.index', compact('workExperiences'));
     }
 

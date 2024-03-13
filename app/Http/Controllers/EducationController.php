@@ -6,62 +6,55 @@ use App\Models\Education;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEducationRequest;
 use App\Http\Requests\UpdateEducationRequest;
+use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $educations = Education::paginate(5);
+        return view('education.index', compact('educations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('education.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreEducationRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        Education::create($request->all());
+
+        return redirect()->route('education.index')
+            ->with('success', 'Education record created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Education $education)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Education $education)
     {
-        //
+        return view('education.edit', compact('education'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateEducationRequest $request, Education $education)
+    public function update(Request $request, Education $education)
     {
-        //
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        $education->update($request->all());
+
+        return redirect()->route('education.index')
+            ->with('success', 'Education record updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Education $education)
     {
-        //
+        $education->delete();
+
+        return redirect()->route('education.index')
+            ->with('success', 'Education record deleted successfully.');
     }
 }
