@@ -113,34 +113,37 @@ public function search(Request $request)
      */
 
      public function store(Request $request)
-{
-    $request->validate([
-        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        // Add other validation rules for your form fields
-    ]);
-
-    $data = $request->except(['_token', 'tags']); // Exclude tags from the main data
-
-    $portfolioItem = PortfolioItem::create($data);
-
-    // Handle image upload
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
-        
-        $imagePath = public_path('Images/' . $imageName);
-        
-        Image::make($image)->save($imagePath);
-
-        // Update the image path in the database
-        $portfolioItem->update(['image' => 'Images/' . $imageName]);
-    }
-
-    // Sync tags for the portfolio item
-    $portfolioItem->tags()->sync($request->input('tags', []));
-
-    return redirect()->route('Portfolio_items.index')->withSuccess('New Portfolio item created successfully.');
-}
+     {
+         $request->validate([
+             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+             // Add other validation rules for your form fields
+         ]);
+     
+         // Get all form data
+         $data = $request->all();
+     
+         // Handle image upload
+         if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+             
+             $imagePath = public_path('Images/' . $imageName);
+             
+             Image::make($image)->save($imagePath);
+     
+             // Add image path to data
+             $data['image'] = 'Images/' . $imageName;
+         }
+     
+         // Create portfolio item with all form data
+         $portfolioItem = PortfolioItem::create($data);
+     
+         // Sync tags for the portfolio item
+         $portfolioItem->tags()->sync($request->input('tags', []));
+     
+         return redirect()->route('Portfolio-items.index')->withSuccess('New Portfolio item created successfully.');
+     }
+     
 
 
     /**
@@ -217,11 +220,11 @@ public function search(Request $request)
         $portfolioItem = PortfolioItem::find($id);
 
         if (!$portfolioItem) {
-            return redirect()->route('Portfolio_items.index')->with('error', 'Portfolio item not found.');
+            return redirect()->route('Portfolio-items.index')->with('error', 'Portfolio item not found.');
         }
 
         $portfolioItem->delete();
 
-        return redirect()->route('Portfolio_items.index')->with('success', 'Portfolio item deleted successfully.');
+        return redirect()->route('Portfolio-items.index')->with('success', 'Portfolio item deleted successfully.');
     }
 }

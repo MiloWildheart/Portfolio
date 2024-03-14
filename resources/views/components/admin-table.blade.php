@@ -163,25 +163,21 @@
                 <div class="col">Email</div>
                 <div class="col">Residence</div>
                 <div class="col">Personal Story</div>
-                <div class="col">Actions</div>
             @elseif ($dataSource === 'relevant-knowledge')
                 <div class="col">Name</div>
                 <div class="col">Description</div>
                 <div class="col">Proficiency</div>
-                <div class="col">Actions</div>
             @elseif ($dataSource === 'work-experience')
                 <div class="col">Workplace</div>
                 <div class="col">Job Type</div>
                 <div class="col">Start Date</div>
                 <div class="col">End Date</div>
                 <div class="col">Duties</div>
-                <div class="col">Actions</div>
             @elseif ($dataSource === 'education')
                 <div class="col">Name</div>
                 <div class="col">School</div>
                 <div class="col">Start Date</div>
                 <div class="col">End Date</div>
-                <div class="col">Actions</div>
             @elseif ($dataSource === 'Tags')
                 <div class="col">Name</div>
                 <div class="col">Color</div>
@@ -202,7 +198,7 @@
                     <div class="col" data-label="Age">{{ $item->age }}</div>
                     <div class="col" data-label="Email">{{ $item->email }}</div>
                     <div class="col" data-label="Residence">{{ $item->residence }}</div>
-                    <div class="col" data-label="Personal Story">{{ str::limit($item->personal_story, 10) }}</div>
+                    <div class="col" data-label="Personal Story">{{ Str::limit($item->personal_story, 10) }}</div>
                 @elseif ($dataSource === 'relevant-knowledge')
                     <div class="col" data-label="Name">{{ $item->name }}</div>
                     <div class="col" data-label="Description">{{ $item->description }}</div>

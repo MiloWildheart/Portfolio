@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonalInfo;
 use App\Models\RelevantKnowledge;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRelevantKnowledgeRequest;
@@ -18,20 +19,37 @@ class RelevantKnowledgeController extends Controller
 
     public function create()
     {
-        return view('relevant_knowledge.create');
+        $personalInfo = PersonalInfo::all(); // Retrieve all personal information
+        return view('relevant_knowledge.create', compact('personalInfo'));
     }
+
 
     public function store(Request $request)
     {
         $request->validate([
-            // Validation rules here
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'proficiency' => 'required|numeric|min:0|max:100', // Assuming proficiency is a percentage
+            'personal_info_id' => 'required|exists:personal_info,id', // Assuming 'personal_info_id' is the foreign key
         ]);
-
-        RelevantKnowledge::create($request->all());
-
-        return redirect()->route('relevant_knowledge.index')
+    
+        // Create a new RelevantKnowledge instance with the validated data
+        $relevantKnowledge = new RelevantKnowledge([
+            'name' => $request->name,
+            'description' => $request->description,
+            'proficiency' => $request->proficiency,
+        ]);
+    
+        // Assign the 'personal_info_id' from the request
+        $relevantKnowledge->personal_info_id = $request->personal_info_id;
+    
+        // Save the new RelevantKnowledge instance
+        $relevantKnowledge->save();
+    
+        return redirect()->route('relevant-knowledge.index')
             ->with('success', 'Relevant knowledge created successfully.');
     }
+    
 
     public function edit(RelevantKnowledge $relevantKnowledge)
     {

@@ -87,7 +87,7 @@
 
     <div class="glassmorphism-card mt-2 p-4">
         <div class="card-body">
-            <form id="contact-form" role="form">
+            <form id="form" action="{{ route('Tags.store') }}" method="POST" role="form">
                 <div class="controls">
                     <div class="form-group">
                         <label for="name">Name *</label>

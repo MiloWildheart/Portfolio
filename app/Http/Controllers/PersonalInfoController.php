@@ -11,13 +11,15 @@ use App\Models\RelevantKnowledge;
 use App\Models\WorkExperience;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PersonalInfoController extends Controller
 {
     public function index(Request $request)
     {
         // Paginate the results
-        $personalInfo = PersonalInfo::with('workExperiences', 'education', 'relevantKnowledges')->paginate(5);
+        $personalInfo = PersonalInfo::with('workExperience', 'education', 'relevantKnowledge')->paginate(5);
     
         return view('personal_info.index', compact('personalInfo'));
     }
@@ -31,12 +33,34 @@ class PersonalInfoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // Validation rules here
+            'Linkedin' => 'required|url',
+            'Github' => 'required|url',
+            'name' => 'required',
+            'email' => 'required|email',
+            'residence' => 'required',
+            'personal_story' => 'required',
+            'age' => 'required|integer|min:0',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $personalInfo = PersonalInfo::create($request->all());
+        $data = $request->all();
 
-        return redirect()->route('personal_info.index')
+         // Handle image upload
+         if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'portfolio_' . time() . '.' . $image->getClientOriginalExtension();
+            
+            $imagePath = public_path('Images/' . $imageName);
+            
+            Image::make($image)->save($imagePath);
+    
+            // Add image path to data
+            $data['image'] = 'Images/' . $imageName;
+        }
+
+        $personalInfo = PersonalInfo::create($data);
+
+        return redirect()->route('personal-info.index')
             ->with('success', 'Personal information created successfully.');
     }
 

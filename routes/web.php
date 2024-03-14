@@ -34,6 +34,7 @@ Route::get('portfolio', function () {
 })->name('portfolio.unauthenticated');
 Route::get('portfolio/search', [PortfolioItemController::class, 'search'])->name('portfolio.search');
 Route::redirect('/login', 'Auth/create');
+Route::get('login', [AuthController::class, 'create'])->name('login');
 
 
     //delete routes
@@ -67,4 +68,8 @@ Route::resource('education', EducationController::class);
 Route::resource('work-experience', WorkExperienceController::class);
 Route::resource('relevant-knowledge', RelevantKnowledgeController::class);
 Route::resource('personal-info', PersonalInfoController::class);
+    // Nested resource for PersonalInfoController within each resource
+Route::resource('education.personal-info', PersonalInfoController::class);
+Route::resource('work-experience.personal-info', PersonalInfoController::class);
+Route::resource('relevant-knowledge.personal-info', PersonalInfoController::class);
 });

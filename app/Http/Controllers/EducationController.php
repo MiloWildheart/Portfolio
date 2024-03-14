@@ -6,6 +6,7 @@ use App\Models\Education;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEducationRequest;
 use App\Http\Requests\UpdateEducationRequest;
+use App\Models\PersonalInfo;
 use Illuminate\Http\Request;
 
 class EducationController extends Controller
@@ -18,20 +19,40 @@ class EducationController extends Controller
 
     public function create()
     {
-        return view('education.create');
+        $personalInfo = PersonalInfo::all(); // Retrieve all personal information
+        return view('education.create', compact('personalInfo'));
     }
+
+
 
     public function store(Request $request)
     {
         $request->validate([
-            // Validation rules here
+            'name' => 'required|string|max:255',
+            'school' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+            'personal_info_id' => 'required|exists:personal_info,id', // Assuming 'personal_info_id' is the foreign key
         ]);
-
-        Education::create($request->all());
-
+    
+        // Create a new Education instance with the validated data
+        $education = new Education([
+            'name' => $request->name,
+            'school' => $request->school,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+    
+        // Assign the 'personal_info_id' from the request
+        $education->personal_info_id = $request->personal_info_id;
+    
+        // Save the new Education instance
+        $education->save();
+    
         return redirect()->route('education.index')
-            ->with('success', 'Education record created successfully.');
+            ->with('success', 'Education created successfully.');
     }
+    
 
     public function edit(Education $education)
     {
