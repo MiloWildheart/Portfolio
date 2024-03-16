@@ -35,7 +35,7 @@ Route::get('portfolio', function () {
 Route::get('portfolio/search', [PortfolioItemController::class, 'search'])->name('portfolio.search');
 Route::redirect('/login', 'Auth/create');
 Route::get('login', [AuthController::class, 'create'])->name('login');
-
+Route::get('about-me', [PersonalInfoController::class, 'resume'])->name('aboutMe');
 
     //delete routes
 

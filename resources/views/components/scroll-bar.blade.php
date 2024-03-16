@@ -73,7 +73,7 @@
         <a href="/">Home</a>
       </li>
       <li>
-        <a href="#">About me</a>
+        <a href="about-me">About me</a>
       </li>
       <li>
         <a href="portfolio">Portfolio</a>

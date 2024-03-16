@@ -23,6 +23,17 @@ class PersonalInfoController extends Controller
     
         return view('personal_info.index', compact('personalInfo'));
     }
+
+    public function resume()
+    {
+        $personalInfo = PersonalInfo::all();
+        $workExperience = WorkExperience::all();
+        $education = Education::all();
+        $relevantKnowledge = RelevantKnowledge::all();
+        
+        return view('aboutMe', compact('personalInfo', 'workExperience', 'education', 'relevantKnowledge'));
+    }
+    
     
 
     public function create()

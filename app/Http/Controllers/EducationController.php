@@ -29,7 +29,7 @@ class EducationController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'school' => 'required|string|max:255',
+            'School' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'personal_info_id' => 'required|exists:personal_info,id', // Assuming 'personal_info_id' is the foreign key
@@ -38,7 +38,7 @@ class EducationController extends Controller
         // Create a new Education instance with the validated data
         $education = new Education([
             'name' => $request->name,
-            'school' => $request->school,
+            'School' => $request->School,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
@@ -52,6 +52,7 @@ class EducationController extends Controller
         return redirect()->route('education.index')
             ->with('success', 'Education created successfully.');
     }
+
     
 
     public function edit(Education $education)
