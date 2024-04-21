@@ -6,11 +6,17 @@ use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\PersonalInfoController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\RelevantKnowledgeController;
+use app\Http\Controllers\SkillsController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Models\Tag;
 use App\Models\PortfolioItem;
+use App\Models\WorkExperience;
+use App\Models\Education;
+use App\Models\RelevantKnowledge;
+use App\Models\PersonalInfo;
+
 
 
 /*
@@ -68,8 +74,10 @@ Route::resource('education', EducationController::class);
 Route::resource('work-experience', WorkExperienceController::class);
 Route::resource('relevant-knowledge', RelevantKnowledgeController::class);
 Route::resource('personal-info', PersonalInfoController::class);
+Route::resource('skills', SkillsController::class);
     // Nested resource for PersonalInfoController within each resource
 Route::resource('education.personal-info', PersonalInfoController::class);
 Route::resource('work-experience.personal-info', PersonalInfoController::class);
 Route::resource('relevant-knowledge.personal-info', PersonalInfoController::class);
+Route::resource('skills.personal-info', PersonalInfoController::class);
 });

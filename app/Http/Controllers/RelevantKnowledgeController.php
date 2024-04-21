@@ -58,15 +58,21 @@ class RelevantKnowledgeController extends Controller
 
     public function update(Request $request, RelevantKnowledge $relevantKnowledge)
     {
+        $personalInfo = PersonalInfo::all();
+    
         $request->validate([
-            // Validation rules here
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'proficiency' => 'required|numeric|min:0|max:100',
         ]);
-
+    
         $relevantKnowledge->update($request->all());
-
+    
         return redirect()->route('relevant_knowledge.index')
-            ->with('success', 'Relevant knowledge updated successfully.');
+            ->with('success', 'Relevant knowledge updated successfully.')
+            ->with('personalInfo', $personalInfo); // Pass $personalInfo to the view
     }
+    
 
     public function destroy(RelevantKnowledge $relevantKnowledge)
     {

@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePersonalInfoRequest;
 use App\Models\Education;
 use App\Models\RelevantKnowledge;
 use App\Models\WorkExperience;
+use App\Models\Skills;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class PersonalInfoController extends Controller
     public function index(Request $request)
     {
         // Paginate the results
-        $personalInfo = PersonalInfo::with('workExperience', 'education', 'relevantKnowledge')->paginate(5);
+        $personalInfo = PersonalInfo::with('workExperience', 'education', 'relevantKnowledge', 'skills')->paginate(5);
     
         return view('personal_info.index', compact('personalInfo'));
     }
@@ -30,8 +31,9 @@ class PersonalInfoController extends Controller
         $workExperience = WorkExperience::all();
         $education = Education::all();
         $relevantKnowledge = RelevantKnowledge::all();
+        $skills = Skills::all();
         
-        return view('aboutMe', compact('personalInfo', 'workExperience', 'education', 'relevantKnowledge'));
+        return view('aboutMe', compact('personalInfo', 'workExperience', 'education', 'relevantKnowledge', 'skills'));
     }
     
     

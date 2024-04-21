@@ -197,7 +197,15 @@ height: 100%;
                         </span>
                     </a>
                 </li>
-
+                <!--skills-->
+                <li>
+                    <a href="/skills">
+                        <i class="fa fa-book fa-2x"></i>
+                        <span class="nav-text">
+                           skills
+                        </span>
+                    </a>
+                </li>
 </ul>
             <ul class="logout">
                 <li>

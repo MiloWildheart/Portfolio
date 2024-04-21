@@ -149,17 +149,16 @@
 </style>
 <x-admin-nav>
 <div class="container">
-    <h1 class="glassmorphism-title">Edit Relevant Knowledge</h1>
+    <h1 class="glassmorphism-title">Add skills</h1>
     <div class="glassmorphism-card mt-2 p-4">
         <div class="card-body">
-            <form id="relevant-knowledge-form" role="form" action="{{ route('relevant-knowledge.update', $relevantKnowledge->id) }}" method="POST">
+            <form id="skills-form" role="form" action="{{ route('skills.store') }}" method="POST">
                 @csrf
-                @method('PUT') <!-- Add this to spoof PUT request -->
                 <div class="controls">
                     <!-- Form Group Name -->
                     <div class="form-group">
                         <label for="name">Name *</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $relevantKnowledge->name }}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -167,7 +166,7 @@
                     <!-- Form Group Description -->
                     <div class="form-group">
                         <label for="description">Description *</label>
-                        <textarea class="form-control" id="description" name="description">{{ $relevantKnowledge->description }}</textarea>
+                        <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -175,7 +174,7 @@
                     <!-- Form Group Proficiency -->
                     <div class="form-group">
                         <label for="proficiency">Proficiency (%) *</label>
-                        <input type="number" class="form-control" id="proficiency" name="proficiency" value="{{ $relevantKnowledge->proficiency }}">
+                        <input type="number" class="form-control" id="proficiency" name="proficiency" value="{{ old('proficiency') }}">
                         @error('proficiency')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -185,7 +184,7 @@
                         <label for="personal_info_id">Personal Info *</label>
                         <select class="form-control" id="personal_info_id" name="personal_info_id">
                     @foreach ($personalInfo as $info)
-                            <option value="{{ $info->id }}" {{ $info->id == $relevantKnowledge->personal_info_id ? 'selected' : '' }}>{{ $info->name }}</option>
+                            <option value="{{ $info->id }}">{{ $info->name }}</option>
                     @endforeach
                         </select>
                     @error('personal_info_id')
@@ -194,11 +193,12 @@
                     </div>
                     <!-- Form Group Submit -->
                     <div class="form-group">
-                        <button type="submit" class="btn btn-send">Update</button> <!-- Change button text to Update -->
+                        <button type="submit" class="btn btn-send">Create</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+ 
 </x-admin-nav>

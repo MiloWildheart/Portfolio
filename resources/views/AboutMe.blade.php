@@ -107,10 +107,11 @@
 <!-- i want a div under this for my personal story, the width should be just a wide as these 3 divs-->
 
 </div>
-<x-divider>EXPERIENCE</x-divider>
+<x-divider>ERVARING</x-divider>
 <x-work-carousel data-source="work-experience" :data="$workExperience"></x-work-carousel>
-<x-divider>PROJECTS</x-divider>
+<x-divider>PROJECEN</x-divider>
 <x-work-carousel data-source="work-experience" :data="$workExperience"></x-work-carousel>
-<x-footer></x-footer>
+<div>
+<x-footer></x-footer></div>
 </body>
 </html>

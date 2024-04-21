@@ -137,6 +137,8 @@
             Personal Information
         @elseif ($dataSource === 'relevant-knowledge')
             Relevant Knowledge
+        @elseif ($dataSource === 'skills')
+            Skills
         @elseif ($dataSource === 'work-experience')
             Work Experiences
         @elseif ($dataSource === 'education')
@@ -164,6 +166,10 @@
                 <div class="col">Residence</div>
                 <div class="col">Personal Story</div>
             @elseif ($dataSource === 'relevant-knowledge')
+                <div class="col">Name</div>
+                <div class="col">Description</div>
+                <div class="col">Proficiency</div>
+            @elseif ($dataSource === 'skills')
                 <div class="col">Name</div>
                 <div class="col">Description</div>
                 <div class="col">Proficiency</div>
@@ -200,6 +206,10 @@
                     <div class="col" data-label="Residence">{{ $item->residence }}</div>
                     <div class="col" data-label="Personal Story">{{ Str::limit($item->personal_story, 10) }}</div>
                 @elseif ($dataSource === 'relevant-knowledge')
+                    <div class="col" data-label="Name">{{ $item->name }}</div>
+                    <div class="col" data-label="Description">{{ $item->description }}</div>
+                    <div class="col" data-label="Proficiency">{{ $item->proficiency }}</div>
+                @elseif ($dataSource === 'skills')
                     <div class="col" data-label="Name">{{ $item->name }}</div>
                     <div class="col" data-label="Description">{{ $item->description }}</div>
                     <div class="col" data-label="Proficiency">{{ $item->proficiency }}</div>
